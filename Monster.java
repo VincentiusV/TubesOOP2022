@@ -1,16 +1,16 @@
 import java.util.List;
 
 public class Monster {
-    private String nama;
+    private String name;
     private List<ElementType> elementTypeList;
     private Stats baseStats;
 
-    public String getNama() {
-        return nama;
+    public String getName() {
+        return name;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<ElementType> getElementTypeList() {
