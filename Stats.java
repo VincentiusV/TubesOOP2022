@@ -4,6 +4,8 @@
  * @author 18220031 Muhammad Raihan Aulia
  */
 
+import java.lang.System;
+
 public class Stats {
     private double healthPoint;
     private double attack;
@@ -11,6 +13,7 @@ public class Stats {
     private double specialAttack;
     private double specialDefense;
     private double speed;
+    private StatBuff statBuff;
 
     /**
      * Constructor
@@ -29,29 +32,75 @@ public class Stats {
         this.specialAttack = specialAttack;
         this.specialDefense = specialDefense;
         this.speed = speed;
-
+        this.statBuff = new StatBuff();
     }
     
-
 
     // Getter
     public double getHP(){
         return healthPoint;
     }
     public double getAttack(){
-        return attack;
+        int buffFactor = statBuff.getBuffAttack();
+        if(buffFactor < 0){
+            return attack*2/(2-buffFactor);
+        }
+        else if(buffFactor == 0){
+            return attack;
+        }
+        else{
+            return attack*(2+buffFactor)/2;
+        }
     }
     public double getDefense(){
-        return defense;
+        int buffFactor = statBuff.getBuffDefense();
+        if(buffFactor < 0){
+            return defense*2/(2-buffFactor);
+        }
+        else if(buffFactor == 0){
+            return defense;
+        }
+        else{
+            return defense*(2+buffFactor)/2;
+        }
     }
     public double getSpecialAttack(){
-        return specialAttack;
+        int buffFactor = statBuff.getBuffSpecialAttack();
+        if(buffFactor < 0){
+            return specialAttack*2/(2-buffFactor);
+        }
+        else if(buffFactor == 0){
+            return specialAttack;
+        }
+        else{
+            return specialAttack*(2+buffFactor)/2;
+        }
     }
+
     public double getSpecialDefense(){
-        return specialDefense;
+        int buffFactor = statBuff.getBuffSpecialDefense();
+        if(buffFactor < 0){
+            return specialDefense*2/(2-buffFactor);
+        }
+        else if(buffFactor == 0){
+            return specialDefense;
+        }
+        else{
+            return specialDefense*(2+buffFactor)/2;
+        }
     }
+
     public double getSpeed(){
-        return speed;
+        int buffFactor = statBuff.getBuffSpeed();
+        if(buffFactor < 0){
+            return speed*2/(2-buffFactor);
+        }
+        else if(buffFactor == 0){
+            return speed;
+        }
+        else{
+            return speed*(2+buffFactor)/2;
+        }
     }
 
     // Setter
@@ -74,4 +123,19 @@ public class Stats {
         this.speed = speed;
     }
 
+    // Method
+    public void printStats(){
+        System.out.print("Health Point      : ");
+        System.out.println(healthPoint);
+        System.out.print("Attack            : ");
+        System.out.println(attack);
+        System.out.print("Defense           : ");
+        System.out.println(defense);
+        System.out.print("Special Attack    : ");
+        System.out.println(specialAttack);
+        System.out.print("Special Defense   : ");
+        System.out.println(specialDefense);
+        System.out.print("Speed             : ");
+        System.out.println(speed);
+    }
 }
