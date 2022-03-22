@@ -1,3 +1,5 @@
+import java.lang.System;
+
 public class StatBuff {
     private int attack;
     private int defense;
@@ -56,5 +58,24 @@ public class StatBuff {
         specialAttack = 0;
         specialDefense = 0;
         speed = 0;
+    }
+
+    public void printBuff(){
+        System.out.println("Buff & Debuff: ");
+        if(attack != 0){
+            System.out.println(String.format("Attack %d", attack));
+        }
+        if(defense != 0){
+            System.out.println(String.format("Defense %d", defense));
+        }
+        if(specialAttack != 0){
+            System.out.println(String.format("Special Attack %d", specialAttack));
+        }
+        if(specialDefense != 0){
+            System.out.println(String.format("Special Defense %d", specialDefense));
+        }
+        if(speed != 0){
+            System.out.println(String.format("Speed %d", speed));
+        }
     }
 }

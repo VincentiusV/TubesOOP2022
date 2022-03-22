@@ -37,6 +37,9 @@ public class Stats {
     
 
     // Getter
+    public StatBuff getStatBuff(){
+        return statBuff;
+    }
     public double getHP(){
         return healthPoint;
     }
@@ -122,9 +125,13 @@ public class Stats {
     public void setSpeed(double speed){
         this.speed = speed;
     }
+    public void setStatBuff(StatBuff statBuff){
+        this.statBuff = statBuff;
+    }
 
     // Method
     public void printStats(){
+        System.out.print("Stats :");
         System.out.print("Health Point      : ");
         System.out.println(healthPoint);
         System.out.print("Attack            : ");
