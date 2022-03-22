@@ -1,3 +1,5 @@
+package src.main.java.com.monstersaku.util;
+
 public class StatBuff {
     private int attack;
     private int defense;

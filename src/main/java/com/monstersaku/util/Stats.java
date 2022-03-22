@@ -1,3 +1,5 @@
+package src.main.java.com.monstersaku.util;
+
 /**
  * Stats.java
  * Kelas Stats memodelkan status yang dimiliki oleh pokemon.
@@ -7,13 +9,13 @@
 import java.lang.System;
 
 public class Stats {
-    private double healthPoint;
-    private double attack;
-    private double defense;
-    private double specialAttack;
-    private double specialDefense;
-    private double speed;
-    private StatBuff statBuff;
+    protected double healthPoint;
+    protected double attack;
+    protected double defense;
+    protected double specialAttack;
+    protected double specialDefense;
+    protected double speed;
+    protected StatBuff statBuff;
 
     /**
      * Constructor

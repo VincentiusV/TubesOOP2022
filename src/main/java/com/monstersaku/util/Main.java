@@ -1,4 +1,6 @@
 // Ini juga coba-coba
+package src.main.java.com.monstersaku.util;
+
 import java.util.ArrayList;
 import java.util.List;
 public class Main {

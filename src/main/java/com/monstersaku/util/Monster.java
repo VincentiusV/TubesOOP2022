@@ -1,3 +1,5 @@
+package src.main.java.com.monstersaku.util;
+
 import java.util.List;
 
 public class Monster {

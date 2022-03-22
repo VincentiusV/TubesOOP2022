@@ -1,3 +1,5 @@
+package src.main.java.com.monstersaku.util;
+
 public enum ElementType {
     NORMAL,
     FIRE,
