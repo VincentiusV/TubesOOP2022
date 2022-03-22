@@ -131,7 +131,7 @@ public class Stats {
 
     // Method
     public void printStats(){
-        System.out.print("Stats :");
+        System.out.println("Stats :");
         System.out.print("Health Point      : ");
         System.out.println(healthPoint);
         System.out.print("Attack            : ");
