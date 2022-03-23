@@ -1,4 +1,4 @@
-package src.main.java.com.monstersaku.util;
+package com.monstersaku.util;
 
 import java.io.BufferedReader;
 import java.io.File;

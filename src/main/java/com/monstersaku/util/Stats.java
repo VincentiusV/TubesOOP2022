@@ -1,4 +1,4 @@
-package src.main.java.com.monstersaku.util;
+package com.monstersaku.util;
 
 /**
  * Stats.java
