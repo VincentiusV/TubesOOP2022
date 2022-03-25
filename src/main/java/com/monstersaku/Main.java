@@ -2,6 +2,7 @@ package com.monstersaku;
 
 import com.monstersaku.util.MonsterPool;
 import com.monstersaku.util.Monster;
+import com.monstersaku.util.Player;
 import com.monstersaku.util.Stats;
 
 import java.util.Arrays;
@@ -18,6 +19,9 @@ public class Main {
         List<Monster> pool = monsterPool.getPool();
         List<Monster> playerPool = new LinkedList<Monster>();
         playerPool.add(pool.get(1));
+        Player player1 = new Player("TesName", playerPool);
+        player1.printMonsterList();
+        System.out.println("=== === END === ===");
         Monster sugar = pool.get(1);
         Stats stats = sugar.getBaseStats();
         System.out.println();
