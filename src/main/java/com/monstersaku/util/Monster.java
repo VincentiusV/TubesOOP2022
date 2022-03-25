@@ -6,35 +6,45 @@ public class Monster {
     private String name;
     private List<ElementType> elementTypeList;
     private Stats baseStats;
+    private List<Move> moveList;
 
-    public Monster(String name, List<ElementType> elementTypeList, Stats baseStats) {
+    public Monster(String name, List<ElementType> elementTypeList, Stats baseStats, List<Move> moveList) {
         this.name = name;
         this.elementTypeList = elementTypeList;
         this.baseStats = baseStats;
+        this.moveList = moveList;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<ElementType> getElementTypeList() {
         return elementTypeList;
-    }
-
-    public void setElementTypeList(List<ElementType> elementTypeList) {
-        this.elementTypeList = elementTypeList;
     }
 
     public Stats getBaseStats() {
         return baseStats;
     }
 
+    public List<Move> getMoveList() {
+        return moveList;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setElementTypeList(List<ElementType> elementTypeList) {
+        this.elementTypeList = elementTypeList;
+    }
+
     public void setBaseStats(Stats baseStats) {
         this.baseStats = baseStats;
+    }
+
+    public void setMoveList(List<Move> moveList) {
+        this.moveList = moveList;
     }
 
     // Coba-coba aja
