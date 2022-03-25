@@ -15,6 +15,12 @@ public class Monster {
         this.moveList = moveList;
     }
 
+    public Monster(String name, List<ElementType> elementTypeList, Stats baseStats) {
+        this.name = name;
+        this.elementTypeList = elementTypeList;
+        this.baseStats = baseStats;
+    }
+
     public String getName() {
         return name;
     }
