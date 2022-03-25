@@ -50,11 +50,30 @@ public class Monster {
     // Coba-coba aja
     public void fight(Monster monster){
         if (this.getBaseStats().getAttack() > monster.getBaseStats().getDefense()){
-            Stats newStats = new Stats(this.getBaseStats().getAttack()-monster.getBaseStats().getHP(),
-                                        monster.getBaseStats().getAttack(), monster.getBaseStats().getDefense(),
-                                        monster.getBaseStats().getSpecialAttack(), monster.getBaseStats().getSpecialDefense(),
-                                        monster.getBaseStats().getSpeed());
-            monster.setBaseStats(newStats);
+            if (this.getBaseStats().getAttack()-monster.getBaseStats().getHP() >= 0){
+                Stats newStats = new Stats(monster.getBaseStats().getHP() - (this.getBaseStats().getAttack()-monster.getBaseStats().getDefense()),
+                        monster.getBaseStats().getAttack(), monster.getBaseStats().getDefense(),
+                        monster.getBaseStats().getSpecialAttack(), monster.getBaseStats().getSpecialDefense(),
+                        monster.getBaseStats().getSpeed());
+                monster.setBaseStats(newStats);
+            }
+            else{
+                Stats newStats = new Stats(0,
+                        monster.getBaseStats().getAttack(), monster.getBaseStats().getDefense(),
+                        monster.getBaseStats().getSpecialAttack(), monster.getBaseStats().getSpecialDefense(),
+                        monster.getBaseStats().getSpeed());
+                monster.setBaseStats(newStats);
+            }
+        }
+        else{
+            System.out.println(this.getName()+" gagal menyerang "+monster.getName());
+        }
+    }
+    public void isDead() {
+        if (getBaseStats().getHP() == 0) {
+            System.out.println("Sayangnya monster " + this.getName() + " sudah mati:(");
+        } else {
+            System.out.println("Monster " + this.getName() + " memiliki sisa darah sebanyak " + this.getBaseStats().getHP());
         }
     }
 }
