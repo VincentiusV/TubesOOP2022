@@ -1,2 +1,3 @@
 id;name;elementTypes;baseStats;moves
 1;Chairmander;FIRE,NORMAL;100,100,100,100,100,100;1,2
+2;Sugar;FIRE,GRASS,NORMAL,WATER;999,999,999,999,999,999;1,2
