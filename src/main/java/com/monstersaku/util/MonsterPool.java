@@ -12,7 +12,7 @@ public class MonsterPool {
     // Constructor
     public MonsterPool(){
         try {
-            CSVReader reader = new CSVReader(new File(Main.class.getResource(file_path).toURI()), ";");
+            CSVReader reader = new CSVReader(new File(MonsterPool.class.getResource(file_path).toURI()), ";");
             reader.setSkipHeader(true);
             List<String[]> lines = reader.read();
             for (String[] line : lines) {
