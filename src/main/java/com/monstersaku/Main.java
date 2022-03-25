@@ -5,11 +5,7 @@ import com.monstersaku.util.Monster;
 import com.monstersaku.util.Player;
 import com.monstersaku.util.Stats;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,15 +14,20 @@ public class Main {
         monsterPool.printMonsterPool();
         List<Monster> pool = monsterPool.getPool();
         List<Monster> playerPool = new LinkedList<Monster>();
-        playerPool.add(pool.get(1));
+        for(int i=0; i<6; i++){
+            Random rand = new Random();
+            playerPool.add(pool.get(rand.nextInt()%100));
+        }
         Player player1 = new Player("TesName", playerPool);
-        player1.printMonsterList();
+        for(int i=0; i<playerPool.size(); i++){
+            player1.printMonsterList();
+        }
         System.out.println("=== === END === ===");
-        Monster sugar = pool.get(1);
-        Stats stats = sugar.getBaseStats();
-        System.out.println();
-        System.out.println("Stats Sugar: ");
-        stats.printStats();
+//        Monster sugar = pool.get(1);
+//        Stats stats = sugar.getBaseStats();
+//        System.out.println();
+//        System.out.println("Stats Sugar: ");
+//        stats.printStats();
           // do nothing
     }
 
