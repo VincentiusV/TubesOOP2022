@@ -10,18 +10,15 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         // baca file Monsterpool
+        Random rand = new Random();
         MonsterPool monsterPool = new MonsterPool();
-        monsterPool.printMonsterPool();
         List<Monster> pool = monsterPool.getPool();
         List<Monster> playerPool = new LinkedList<Monster>();
         for(int i=0; i<6; i++){
-            Random rand = new Random();
-            playerPool.add(pool.get(rand.nextInt()%100));
+            playerPool.add(pool.get(Math.abs(rand.nextInt()%10)));
         }
         Player player1 = new Player("TesName", playerPool);
-        for(int i=0; i<playerPool.size(); i++){
-            player1.printMonsterList();
-        }
+        player1.printMonsterList();
         System.out.println("=== === END === ===");
 //        Monster sugar = pool.get(1);
 //        Stats stats = sugar.getBaseStats();
