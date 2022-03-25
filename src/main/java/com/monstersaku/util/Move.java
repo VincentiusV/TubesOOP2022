@@ -1,12 +1,12 @@
 package com.monstersaku.util;
 
 public class Move{
-    private int id;
-    private String name;
-    private ElementType elementType;
-    private int accuracy;
-    private int priority;
-    private int ammunition;
+    protected int id;
+    protected String name;
+    protected ElementType elementType;
+    protected int accuracy;
+    protected int priority;
+    protected int ammunition;
 
     //konstruktor
     public Move(String name, ElementType elementType, int accuracy, int priority, int ammunition){
@@ -17,7 +17,6 @@ public class Move{
         this.ammunition = ammunition;
     }
     
-
     //getter & setter
     public int getId() {
         return this.id;

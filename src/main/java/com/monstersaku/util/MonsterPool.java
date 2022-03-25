@@ -31,7 +31,7 @@ public class MonsterPool {
 
     private Monster stringtoMonster(String[] input){
         String name = input[1];
-        List<ElementType> elementTypeList = stringtoListElementTypes(input[2]);
+        List<ElementType> elementTypeList = stringtoListElementTypesList(input[2]);
         Stats baseStats = stringtoStats(input[3]);
         
 
@@ -39,20 +39,20 @@ public class MonsterPool {
         return monster;
     }
 
-    private List<ElementType> stringtoListElementTypes(String input){
+    private List<ElementType> stringtoListElementTypesList(String input){
         String arrString[] = input.split(",");
         List<ElementType> list = new LinkedList<ElementType>();
         for(String elementType : arrString){
-            if(elementType == "NORMAL"){
+            if(elementType.equals("NORMAL")){
                 list.add(ElementType.NORMAL);
             }
-            else if(elementType == "FIRE"){
+            else if(elementType.equals("FIRE")){
                 list.add(ElementType.FIRE);
             }
-            else if(elementType == "WATER"){
+            else if(elementType.equals("WATER")){
                 list.add(ElementType.WATER);
             }
-            else if(elementType == "GRASS"){
+            else if(elementType.equals("GRASS")){
                 list.add(ElementType.GRASS);
             }
         }
@@ -81,7 +81,7 @@ public class MonsterPool {
             Stats stat = monster.getBaseStats();
 
             // print Monster Name
-            System.out.println(String.format("%s ===========>", name));
+            System.out.println(String.format("%s ======================>", name));
 
             // print ElementType
             System.out.println("Element Types: ");
@@ -99,10 +99,6 @@ public class MonsterPool {
                     System.out.println("GRASS");
                 }
             }
-
-
-            
-            
             stat.printStats();
         }
     }
