@@ -22,8 +22,8 @@ public class MovePool {
                 String name = line[2];
                 ElementType elementType = stringtoElementType(line[3]);
                 int accuracy = Integer.parseInt(line[4]);
-                int priority = 1;
-                int ammunition = 10;
+                int priority = Integer.parseInt(line[5]);
+                int ammunition = Integer.parseInt(line[6]);
                 String target = line[7];
     
                 // if the move type is normal move
@@ -124,6 +124,11 @@ public class MovePool {
             else if(move instanceof StatusMove){
                 System.out.println("STATUS MOVE");
             }
+            
+            // print Stats of move
+            System.out.println("Accuracy      : " + move.getAccuracy());
+            System.out.println("Priority      : " + move.getPriority());
+            System.out.println("Ammunition    : " + move.getAmmunition());
         }
     }
 }
