@@ -27,7 +27,7 @@ public class Player {
         this.monsterList = monsterList;
     }
     public void printMonsterList(){
-        System.out.println("}=== PLAYER MONSTER ========================{");
+        System.out.println("=== === "+getPlayerName().toUpperCase()+" MONSTER === ===");
         for(Monster monster : monsterList){
             String name = monster.getName();
             List<ElementType> elementTypes = monster.getElementTypeList();

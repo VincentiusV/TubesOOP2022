@@ -9,25 +9,51 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         // baca file Monsterpool
-        Random rand = new Random();
         MonsterPool monsterPool = new MonsterPool();
         List<Monster> pool = monsterPool.getPool();
-        List<Monster> playerPool = new LinkedList<Monster>();
-        for(int i=0; i<6; i++){
-            playerPool.add(pool.get(Math.abs(rand.nextInt()%10)));
+        List<Monster> playerPool1 = new LinkedList<Monster>();
+        List<Monster> playerPool2 = new LinkedList<Monster>();
+
+        Player player1 = addMonster(playerPool1, pool);
+        Player player2 = addMonster(playerPool2, pool);
+        try {
+            System.out.println("Pilihan Monster Anda: ");
+            player1.printMonsterList();
+            System.out.printf("Monster yang akan menyerang: ");
+            Integer attackingMonster = scanner.nextInt();
+            System.out.println("Pilihan Monster lawan: ");
+            player2.printMonsterList();
+            System.out.printf("Monster yang akan diserang: ");
+            Integer defendingMonster = scanner.nextInt();
+
+            System.out.println("Monster " + playerPool1.get(attackingMonster).getName() + " milik " + player1.getPlayerName() + " akan menyerang monster " + playerPool2.get(defendingMonster).getName() + " milik " + player2.getPlayerName());
+            playerPool1.get(attackingMonster).fight(playerPool2.get(defendingMonster));
+            playerPool2.get(defendingMonster).isDead();
+        }catch (Exception e){
+            System.out.println(e);
         }
-        Player player1 = new Player("TesName", playerPool);
-        player1.printMonsterList();
         System.out.println("=== === END === ===");
+
 //        Monster sugar = pool.get(1);
 //        Stats stats = sugar.getBaseStats();
 //        System.out.println();
 //        System.out.println("Stats Sugar: ");
 //        stats.printStats();
-          // do nothing
+        // do nothing
     }
-
+    public static Player addMonster(List<Monster> listName, List<Monster> pool){
+        Scanner scanner = new Scanner(System.in);
+        Random rand = new Random();
+        for(int i=0; i<6; i++){
+            listName.add(pool.get(Math.abs(rand.nextInt()%10)));
+        }
+        System.out.printf("Masukkan nama player: ");
+        String name = scanner.next();
+        Player player = new Player(name, listName);
+        return player;
+    }
 
 
 

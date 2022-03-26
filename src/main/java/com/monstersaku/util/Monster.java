@@ -76,7 +76,7 @@ public class Monster {
         }
     }
     public void isDead() {
-        if (getBaseStats().getHP() == 0) {
+        if (getBaseStats().getHP() <= 0) {
             System.out.println("Sayangnya monster " + this.getName() + " sudah mati:(");
         } else {
             System.out.println("Monster " + this.getName() + " memiliki sisa darah sebanyak " + this.getBaseStats().getHP());
