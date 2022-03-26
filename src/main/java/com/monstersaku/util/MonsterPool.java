@@ -12,7 +12,8 @@ public class MonsterPool {
     // idMove menjadi nomor di array
     private static String file_path = "../configs/monsterpool.csv";
     private List<Monster> pool = new LinkedList<Monster>();
-    private List<Move> movelist = new MovePool().getPool();
+    private MovePool movePool = new MovePool();
+    private List<Move> movelist = movePool.getPool();
     
     /**
      * Creating a MonsterPool object.
@@ -40,6 +41,14 @@ public class MonsterPool {
     public List<Monster> getPool(){
         return pool;
     }
+    /**
+     * Getter of movePool (an object of MovePool)
+     * @return movePool
+     */
+    public MovePool getMovePool(){
+        return movePool;
+    }
+
     /**
      * Turn an array of string to acceptable format to make a object of Monster
      * @param input in form of array of string

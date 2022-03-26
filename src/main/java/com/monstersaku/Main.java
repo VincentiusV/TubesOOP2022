@@ -1,6 +1,7 @@
 package com.monstersaku;
 
 import com.monstersaku.util.MonsterPool;
+import com.monstersaku.util.MovePool;
 import com.monstersaku.util.Monster;
 import com.monstersaku.util.Player;
 import com.monstersaku.util.Stats;
@@ -10,12 +11,32 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // baca file Monsterpool
+        // baca file monsterpool dan movepool
         MonsterPool monsterPool = new MonsterPool();
         List<Monster> pool = monsterPool.getPool();
         List<Monster> playerPool1 = new LinkedList<Monster>();
         List<Monster> playerPool2 = new LinkedList<Monster>();
 
+        // minta MovePool dari monsterPool biar sama dengan yang ada di monsterpool
+        MovePool movePool = monsterPool.getMovePool();
+        movePool.printMovePool();
+
+        /*
+        Monster dah pasti punya skill kalau ada skillnya di monsterpool.csv
+        Skill monster yang ada di csv ngga termasuk default, kalau mau bilang ya
+        biar sekalian dibuat dari sananya langsung punya default.
+        */
+        int index_monster = 1; // index dimulai dari 0
+        Monster monster = pool.get(index_monster);
+
+        // Mulai testing ngeprint isinya
+        System.out.println("Testing MovePool dan MonsterPool");
+        movePool.printMovePool();
+        System.out.println();
+        monsterPool.printMonsterPool();
+        System.out.println();
+        
+        System.out.println("Testing Player dan gameplay");
         Player player1 = addMonster(playerPool1, pool);
         Player player2 = addMonster(playerPool2, pool);
         try {
@@ -31,17 +52,12 @@ public class Main {
             System.out.println("Monster " + playerPool1.get(attackingMonster).getName() + " milik " + player1.getPlayerName() + " akan menyerang monster " + playerPool2.get(defendingMonster).getName() + " milik " + player2.getPlayerName());
             playerPool1.get(attackingMonster).fight(playerPool2.get(defendingMonster));
             playerPool2.get(defendingMonster).isDead();
+            scanner.close();
         }catch (Exception e){
             System.out.println(e);
         }
         System.out.println("=== === END === ===");
 
-//        Monster sugar = pool.get(1);
-//        Stats stats = sugar.getBaseStats();
-//        System.out.println();
-//        System.out.println("Stats Sugar: ");
-//        stats.printStats();
-        // do nothing
     }
     public static Player addMonster(List<Monster> listName, List<Monster> pool){
         Scanner scanner = new Scanner(System.in);
@@ -52,34 +68,7 @@ public class Main {
         System.out.printf("Masukkan nama player: ");
         String name = scanner.next();
         Player player = new Player(name, listName);
+        scanner.close();
         return player;
     }
-
-
-
-
-        
-
-
-
-
-        /*for (String fileName : CSV_FILE_PATHS) {
-            try {
-                System.out.printf("Filename: %s\n", fileName);
-                CSVReader reader = new CSVReader(new File(Main.class.getResource(fileName).toURI()), ";");
-                reader.setSkipHeader(true);
-                List<String[]> lines = reader.read();
-                System.out.println("=========== CONTENT START ===========");
-                for (String[] line : lines) {
-                    for (String word : line) {
-                        System.out.printf("%s ||", word);
-                    }
-                    System.out.println();
-                }
-                System.out.println("=========== CONTENT END ===========");
-                System.out.println();
-            } catch (Exception e) {
-                // do nothing
-            }
-        }*/
 }
