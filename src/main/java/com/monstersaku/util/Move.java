@@ -1,5 +1,8 @@
 package com.monstersaku.util;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Move{
     protected int id;
     protected String name;
@@ -66,4 +69,62 @@ public class Move{
         this.ammunition = ammunition;
     }
 
+    public Double getEffectivity(Move move, Monster monster){
+        Double effectivityFinal = 1.0;
+
+        for (int i=0 ; i < monster.elementTypeList.size(); i++){
+            if ((this.getElementType() == ElementType.FIRE) && (monster.getElementType(i) == ElementType.FIRE)){
+                effectivityFinal *= 0.25;
+            }
+            else if ((this.getElementType() == ElementType.FIRE) && (monster.getElementType(i) == ElementType.WATER)){
+                effectivityFinal *= 0.9;
+            }
+            else if ((this.getElementType() == ElementType.FIRE) && (monster.getElementType(i) == ElementType.GRASS)){
+                effectivityFinal *= 1.5;
+            }
+            else if ((this.getElementType() == ElementType.FIRE) && (monster.getElementType(i) == ElementType.NORMAL)){
+                effectivityFinal *= 1.5;
+            }
+            else if ((this.getElementType() == ElementType.WATER) && (monster.getElementType(i) == ElementType.FIRE)){
+                effectivityFinal *= 1;
+            }
+            else if ((this.getElementType() == ElementType.WATER) && (monster.getElementType(i) == ElementType.WATER)){
+                effectivityFinal *= 0.25;
+            }
+            else if ((this.getElementType() == ElementType.WATER) && (monster.getElementType(i) == ElementType.GRASS)){
+                effectivityFinal *= 1;
+            }
+            else if ((this.getElementType() == ElementType.WATER) && (monster.getElementType(i) == ElementType.NORMAL)){
+                effectivityFinal *= 1;
+            }
+            else if ((this.getElementType() == ElementType.GRASS) && (monster.getElementType(i) == ElementType.FIRE)){
+                effectivityFinal *= 1;
+            }
+            else if ((this.getElementType() == ElementType.GRASS) && (monster.getElementType(i) == ElementType.WATER)){
+                effectivityFinal *= 1.75;
+            }
+            else if ((this.getElementType() == ElementType.GRASS) && (monster.getElementType(i)) == ElementType.GRASS){
+                effectivityFinal *= 0.25;
+            }
+            else if ((this.getElementType() == ElementType.GRASS) && (monster.getElementType(i) == ElementType.NORMAL)){
+                effectivityFinal *= 1;
+            }
+            else if ((this.getElementType() == ElementType.NORMAL) && (monster.getElementType(i) == ElementType.FIRE)){
+                effectivityFinal *= 1;
+            }
+            else if ((this.getElementType() == ElementType.NORMAL) && (monster.getElementType(i) == ElementType.WATER)){
+                effectivityFinal *= 1;
+            }
+            else if ((this.getElementType() == ElementType.NORMAL) && (monster.getElementType(i) == ElementType.GRASS)){
+                effectivityFinal *= 1;
+            }
+            else if ((this.getElementType() == ElementType.NORMAL) && (monster.getElementType(i) == ElementType.NORMAL)){
+                effectivityFinal *= 1;
+            }
+            else{
+                effectivityFinal *= 1;
+            }
+        }
+        return effectivityFinal;
+    }
 }

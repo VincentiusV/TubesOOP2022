@@ -3,9 +3,9 @@ package com.monstersaku.util;
 import java.util.List;
 
 public class Monster {
-    private String name;
-    private List<ElementType> elementTypeList;
-    private Stats baseStats;
+    protected String name;
+    protected List<ElementType> elementTypeList;
+    protected Stats baseStats;
     private List<Move> moveList;
 
     public Monster(String name, List<ElementType> elementTypeList, Stats baseStats, List<Move> moveList) {
@@ -27,6 +27,10 @@ public class Monster {
 
     public List<ElementType> getElementTypeList() {
         return elementTypeList;
+    }
+
+    public ElementType getElementType(int i){
+        return elementTypeList.get(i);
     }
 
     public Stats getBaseStats() {

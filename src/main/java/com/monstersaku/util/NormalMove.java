@@ -13,7 +13,7 @@ public class NormalMove extends Move {
     }
 
     public void useNormalMove (Monster monster1, Monster monster2){
-
+        
     }
 
 }
