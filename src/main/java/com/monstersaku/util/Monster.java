@@ -80,7 +80,7 @@ public class Monster {
             System.out.println(this.getName()+" gagal menyerang "+monster.getName());
         }
     }
-    public boolean isDead() {
+    public void isDead() {
         if (getBaseStats().getHP() <= 0) {
             System.out.println("Sayangnya monster " + this.getName() + " sudah mati:(");
         } else {
