@@ -57,6 +57,7 @@ public class Monster {
         this.moveList = moveList;
     }
 
+
     // Coba-coba aja
     public void fight(Monster monster){
         if (this.getBaseStats().getAttack() > monster.getBaseStats().getDefense()){
@@ -79,7 +80,7 @@ public class Monster {
             System.out.println(this.getName()+" gagal menyerang "+monster.getName());
         }
     }
-    public void isDead() {
+    public boolean isDead() {
         if (getBaseStats().getHP() <= 0) {
             System.out.println("Sayangnya monster " + this.getName() + " sudah mati:(");
         } else {

@@ -5,10 +5,12 @@ import java.util.List;
 public class Player {
     private String playerName;
     private List<Monster> monsterList;
+    private int countMonster;
 
     public Player(String playerName, List<Monster> monsterList) {
         this.playerName = playerName;
         this.monsterList = monsterList;
+        countMonster = 6;
     }
 
     public String getPlayerName() {
@@ -54,6 +56,17 @@ public class Player {
             }
             stat.printStats();
         }
+    }
+    public void monsterDead(){
+        for (Monster monster: monsterList){
+            if (monster.getBaseStats().getHP() <= 0){
+                monsterList.remove(monster);
+                countMonster -= 1;
+            }
+        }
+    }
+    public boolean isHaveMonster(){
+        return monsterList.size() != 0;
     }
 }
 
