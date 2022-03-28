@@ -37,8 +37,13 @@ public class Main {
         System.out.println();
         
         System.out.println("Testing Player dan gameplay");
-        Player player1 = addMonster(playerPool1, pool);
-        Player player2 = addMonster(playerPool2, pool);
+        System.out.println();
+        System.out.printf("Masukkan nama player 1: ");
+        String name1 = scanner.next();
+        System.out.printf("Masukkan nama player 2: ");
+        String name2 = scanner.next();
+        Player player1 = addMonster(name1, playerPool1, pool);
+        Player player2 = addMonster(name2, playerPool2, pool);
         try {
             System.out.println("Pilihan Monster Anda: ");
             player1.printMonsterList();
@@ -59,16 +64,12 @@ public class Main {
         System.out.println("=== === END === ===");
 
     }
-    public static Player addMonster(List<Monster> listName, List<Monster> pool){
-        Scanner scanner = new Scanner(System.in);
+    private static Player addMonster(String name, List<Monster> listName, List<Monster> pool){
         Random rand = new Random();
         for(int i=0; i<6; i++){
             listName.add(pool.get(Math.abs(rand.nextInt()%10)));
         }
-        System.out.printf("Masukkan nama player: ");
-        String name = scanner.next();
         Player player = new Player(name, listName);
-        scanner.close();
         return player;
     }
 }
