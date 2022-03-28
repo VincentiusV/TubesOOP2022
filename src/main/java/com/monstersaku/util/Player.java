@@ -21,6 +21,10 @@ public class Player {
         return monsterList;
     }
 
+    public int getCountMonster(){
+        return countMonster;
+    }
+
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
@@ -57,12 +61,10 @@ public class Player {
             stat.printStats();
         }
     }
-    public void monsterDead(){
-        for (Monster monster: monsterList){
-            if (monster.getBaseStats().getHP() <= 0){
-                monsterList.remove(monster);
-                countMonster -= 1;
-            }
+    public void monsterDead(Monster monster){
+        if (monster.getBaseStats().getHP() <= 0){
+            monsterList.remove(monster);
+            countMonster -= 1;
         }
     }
     public boolean isHaveMonster(){

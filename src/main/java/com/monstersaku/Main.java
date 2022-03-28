@@ -56,7 +56,14 @@ public class Main {
 
             System.out.println("Monster " + playerPool1.get(attackingMonster).getName() + " milik " + player1.getPlayerName() + " akan menyerang monster " + playerPool2.get(defendingMonster).getName() + " milik " + player2.getPlayerName());
             playerPool1.get(attackingMonster).fight(playerPool2.get(defendingMonster));
-            playerPool2.get(defendingMonster).isDead();
+            if(playerPool2.get(defendingMonster).isDead()){
+                System.out.println("Sayangnya monster " + playerPool2.get(defendingMonster).getName() + " sudah mati:(");
+                player2.monsterDead(player2.getMonsterList().get(defendingMonster));
+                player2.printMonsterList();
+            }
+            else{
+                System.out.println("Monster " + playerPool2.get(defendingMonster).getName() + " memiliki sisa darah sebanyak " + playerPool2.get(defendingMonster).getBaseStats().getHP());
+            }
             scanner.close();
         }catch (Exception e){
             System.out.println(e);
