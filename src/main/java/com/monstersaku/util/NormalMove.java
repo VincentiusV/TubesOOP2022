@@ -12,8 +12,10 @@ public class NormalMove extends Move {
         super(name, elementType, accuracy, priority,ammunition);
     }
 
-    public void useNormalMove (Monster monster1, Monster monster2){
-        
+    public void useNormalMove (Monster sourceMonster, Monster targetMonster){
+        float finaldamage= (float)Math.floor((((sourceMonster.getBaseStats().getAttack()) / (targetMonster.getBaseStats().getDefense())) + 2 ) * Math.random() * getEffectivity(this, targetMonster));
+        Double HPBaru;
+        HPBaru = targetMonster.getBaseStats().getHP() - finaldamage;
+        targetMonster.getBaseStats().setHP(HPBaru);
     }
-
 }
