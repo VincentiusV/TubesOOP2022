@@ -6,11 +6,13 @@ public class Player {
     private String playerName;
     private List<Monster> monsterList;
     private int countMonster;
+    private Monster currentMonster;
 
     public Player(String playerName, List<Monster> monsterList) {
         this.playerName = playerName;
         this.monsterList = monsterList;
         countMonster = 6;
+        currentMonster = monsterList.get(0);
     }
 
     public String getPlayerName() {
@@ -60,6 +62,12 @@ public class Player {
             }
             stat.printStats();
         }
+    }
+    public void changeMonster(int monsterNumber){
+        currentMonster = monsterList.get(monsterNumber);
+    }
+    public void printCurrentPokemon(){
+        System.out.println(currentMonster.getName());
     }
     public void monsterDead(Monster monster){
         if (monster.getBaseStats().getHP() <= 0){

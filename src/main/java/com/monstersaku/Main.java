@@ -44,27 +44,42 @@ public class Main {
         String name2 = scanner.next();
         Player player1 = addMonster(name1, playerPool1, pool);
         Player player2 = addMonster(name2, playerPool2, pool);
+        player1.printCurrentPokemon();
         try {
-            System.out.println("Pilihan Monster Anda: ");
-            player1.printMonsterList();
-            System.out.printf("Monster yang akan menyerang: ");
-            Integer attackingMonster = scanner.nextInt();
-            System.out.println("Pilihan Monster lawan: ");
-            player2.printMonsterList();
-            System.out.printf("Monster yang akan diserang: ");
-            Integer defendingMonster = scanner.nextInt();
-
-            System.out.println("Monster " + playerPool1.get(attackingMonster).getName() + " milik " + player1.getPlayerName() + " akan menyerang monster " + playerPool2.get(defendingMonster).getName() + " milik " + player2.getPlayerName());
-            playerPool1.get(attackingMonster).fight(playerPool2.get(defendingMonster));
-            if(playerPool2.get(defendingMonster).isDead()){
-                System.out.println("Sayangnya monster " + playerPool2.get(defendingMonster).getName() + " sudah mati:(");
-                player2.monsterDead(player2.getMonsterList().get(defendingMonster));
+            System.out.println("==== SELECTION MENU ====");
+            System.out.println("1. Move");
+            System.out.println("2. Switch Monster");
+            System.out.printf("Pilihan Anda (dalam angka): ");
+            Integer choice = scanner.nextInt();
+            if(choice == 1){
+                System.out.println("Pilihan Monster Anda: ");
+                player1.printMonsterList();
+                System.out.printf("Monster yang akan menyerang: ");
+                Integer attackingMonster = scanner.nextInt();
+                System.out.println("Pilihan Monster lawan: ");
                 player2.printMonsterList();
+                System.out.printf("Monster yang akan diserang: ");
+                Integer defendingMonster = scanner.nextInt();
+
+                System.out.println("Monster " + playerPool1.get(attackingMonster).getName() + " milik " + player1.getPlayerName() + " akan menyerang monster " + playerPool2.get(defendingMonster).getName() + " milik " + player2.getPlayerName());
+                playerPool1.get(attackingMonster).fight(playerPool2.get(defendingMonster));
+                if(playerPool2.get(defendingMonster).isDead()){
+                    System.out.println("Sayangnya monster " + playerPool2.get(defendingMonster).getName() + " sudah mati:(");
+                    player2.monsterDead(player2.getMonsterList().get(defendingMonster));
+                    player2.printMonsterList();
+                }
+                else{
+                    System.out.println("Monster " + playerPool2.get(defendingMonster).getName() + " memiliki sisa darah sebanyak " + playerPool2.get(defendingMonster).getBaseStats().getHP());
+                }
+                scanner.close();
             }
-            else{
-                System.out.println("Monster " + playerPool2.get(defendingMonster).getName() + " memiliki sisa darah sebanyak " + playerPool2.get(defendingMonster).getBaseStats().getHP());
+            else if(choice == 2){
+                player1.printMonsterList();
+                System.out.printf("Pilihan pokemon Anda (dalam angka): ");
+                Integer pokemonChange = scanner.nextInt();
+                player1.changeMonster(pokemonChange);
+                player1.printCurrentPokemon();
             }
-            scanner.close();
         }catch (Exception e){
             System.out.println(e);
         }
