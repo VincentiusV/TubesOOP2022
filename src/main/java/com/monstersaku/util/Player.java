@@ -42,7 +42,7 @@ public class Player {
             Stats stat = monster.getBaseStats();
 
             // print Monster Name
-            System.out.println(String.format("%s ======================>", name));
+            System.out.printf("%d.%s ======================>", monsterList.indexOf(monster), name);
 
             // print ElementType
             System.out.println("Element Types: ");

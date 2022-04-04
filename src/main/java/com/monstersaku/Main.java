@@ -42,6 +42,8 @@ public class Main {
         System.out.println();
 
         // inisialisasi
+        System.out.println("Inisialisasi...");
+        System.out.println("SELAMAT DATANG DI MONSTER SAKU!! (definitely not pokemon)");
         System.out.printf("Masukkan nama player 1: ");
         String name1 = scanner.next();
         System.out.printf("Masukkan nama player 2: ");
@@ -64,12 +66,23 @@ public class Main {
             while (player1.isHaveMonster() && player2.isHaveMonster()) {
                 while (!monster1.isDead() && !monster2.isDead()) {
 
-                    Integer choice = BattleMenu(monster1, scanner);
+                    // Player 1
+                    System.out.printf("%s turn.%n", player1.getPlayerName());
+                    Integer choice = battleMenu(monster1, scanner);
                     if (choice.equals(1)) {
                         Move monsterMove = chooseMove(monster1, monster2, scanner);
                         // masukin penggunaan move dari monster yang nyerang
                     } else if (choice.equals(2)) { // select monster
                         monster1 = selectMonster(player1, scanner, monster1);
+                    }
+                    // Player 2
+                    System.out.printf("%s turn.%n", player2.getPlayerName());
+                    choice = battleMenu(monster2, scanner);
+                    if (choice.equals(1)) {
+                        Move monsterMove = chooseMove(monster2, monster1, scanner);
+                        // masukin penggunaan move dari monster yang nyerang
+                    } else if (choice.equals(2)) { // select monster
+                        monster1 = selectMonster(player2, scanner, monster2);
                     }
                 }
                 if (monster1.isDead() && player1.isHaveMonster()) {
@@ -116,13 +129,14 @@ public class Main {
     }
 
     public static Move chooseMove(Monster monster1, Monster monster2, Scanner scanner) {
-        // monster1.printMonsterMoves();
+        monster1.printMonsterMoves();
         Move move;
         System.out.printf("Pilih move apa yang akan dilakukan oleh %s kepada %s: %n", monster1.getName(),
                 monster2.getName());
         int index = scanner.nextInt();
 
         move = monster1.getMoveList().get(index);
+        List<Move> movelist = monster1.getMoveList();
         while (index >= monster1.getMoveList().size() || index < 0) { 
             // saya ada ide buat nerapin exception tapi mengmager
             System.out.println("Input diluar range daftar move monster");
@@ -133,15 +147,16 @@ public class Main {
 
         return move;
     }
-
     public static Monster selectMonster(Player player, Scanner scanner, Monster currmonster) {
         printChooseMonster(player);
         int index = scanner.nextInt();
-        while (index == player.getMonsterList().indexOf(currmonster) || index >= player.getMonsterList().size()
+        List<Monster> monsterlist = player.getMonsterList();
+        int currindex = monsterlist.indexOf(currmonster);
+        while (index == currindex || index >= monsterlist.size()
                 || index < 0) {
-            if (index == player.getMonsterList().indexOf(currmonster)) {
+            if (index == currindex) {
                 System.out.println("Pilihan anda merupakan monster yang sekarang anda pakai.");
-            } else if (index >= player.getMonsterList().size() || index < 0) {
+            } else if (index >= monsterlist.size() || index < 0) {
                 System.out.println("Pilihan anda berada diluar index monster yang anda miliki.");
             }
             System.out.print("Masukkan pilihan anda: ");
@@ -152,9 +167,13 @@ public class Main {
         return monster;
     }
 
-    public static int BattleMenu(Monster monster, Scanner scanner) {
+    public static int battleMenu(Monster monster, Scanner scanner) {
         PrintBattleMenu(monster);
         int choice = scanner.nextInt();
         return choice;
+    }
+
+    public static Monster dOTeffect(Monster monster){
+        return monster;
     }
 }
