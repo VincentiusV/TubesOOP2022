@@ -57,6 +57,48 @@ public class Monster {
         this.moveList = moveList;
     }
 
+    // numpang print monster move
+    public void printMonsterMoves(){
+        System.out.println("}=== MOVE LIST ========================{");
+        for (Move move : moveList) {
+            System.out.println();
+            String name = move.getName();
+            ElementType elementType = move.getElementType();
+
+            
+            System.out.print(String.format("%d.%s ", moveList.indexOf(move), name));
+            System.out.print("=".repeat(26 - name.length()));
+            System.out.println("{");
+
+            // print ElementType
+            System.out.print("Element Types : ");
+            if (elementType == ElementType.NORMAL) {
+                System.out.println("NORMAL");
+            } else if (elementType == ElementType.FIRE) {
+                System.out.println("FIRE");
+            } else if (elementType == ElementType.WATER) {
+                System.out.println("WATER");
+            } else if (elementType == ElementType.GRASS) {
+                System.out.println("GRASS");
+            }
+
+            // print classType
+            System.out.print("Move type     : ");
+            if (move instanceof NormalMove) {
+                System.out.println("NORMAL MOVE");
+            } else if (move instanceof SpecialMove) {
+                System.out.println("SPECIAL MOVE");
+            } else if (move instanceof StatusMove) {
+                System.out.println("STATUS MOVE");
+            }
+
+            // print Stats of move
+            System.out.println("Accuracy      : " + move.getAccuracy());
+            System.out.println("Priority      : " + move.getPriority());
+            System.out.println("Ammunition    : " + move.getAmmunition());
+        }
+    }
+    
 
     // Coba-coba aja
     public void fight(Monster monster){
