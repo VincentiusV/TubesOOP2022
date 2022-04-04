@@ -50,7 +50,6 @@ public class Main {
         String name2 = scanner.next();
         Player player1 = addMonster(name1, playerPool1, pool);
         Player player2 = addMonster(name2, playerPool2, pool);
-        player1.printCurrentPokemon();
         try {
             // Milih monster pertama
             List<ElementType> tempElementType = new LinkedList<ElementType>();
