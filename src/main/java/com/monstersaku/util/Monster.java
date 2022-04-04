@@ -1,5 +1,6 @@
 package com.monstersaku.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Monster {
@@ -7,19 +8,28 @@ public class Monster {
     protected List<ElementType> elementTypeList;
     protected Stats baseStats;
     private List<Move> moveList;
+    private ArrayList<Boolean> conditionList;
 
-    public Monster(String name, List<ElementType> elementTypeList, Stats baseStats, List<Move> moveList) {
+    public Monster(String name, List<ElementType> elementTypeList, Stats baseStats, List<Move> moveList,List<Boolean> conditionList) {
         this.name = name;
         this.elementTypeList = elementTypeList;
         this.baseStats = baseStats;
         this.moveList = moveList;
+        this.conditionList = new ArrayList<Boolean>();
+        for (int i = 0; i < 4; i++) {
+            conditionList.add(false); //0. Burn 1. Poison 2. Sleep 3. Paralyze
+        }
+        
+        
     }
+    
+        public Monster(String name, List<ElementType> elementTypeList, Stats baseStats) {
+            this.name = name;
+            this.elementTypeList = elementTypeList;
+            this.baseStats = baseStats;
+        }      
+            ;
 
-    public Monster(String name, List<ElementType> elementTypeList, Stats baseStats) {
-        this.name = name;
-        this.elementTypeList = elementTypeList;
-        this.baseStats = baseStats;
-    }
 
     public String getName() {
         return name;
@@ -40,6 +50,9 @@ public class Monster {
     public List<Move> getMoveList() {
         return moveList;
     }
+    public Boolean getconditionList(int i){
+        return conditionList.get(i);
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -55,6 +68,10 @@ public class Monster {
 
     public void setMoveList(List<Move> moveList) {
         this.moveList = moveList;
+    }
+
+    public void setconditionList(int i, boolean state){
+        conditionList.set(i, state);
     }
 
     // numpang print monster move
