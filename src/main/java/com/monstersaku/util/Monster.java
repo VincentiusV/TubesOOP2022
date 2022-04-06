@@ -10,7 +10,7 @@ public class Monster {
     private List<Move> moveList;
     private ArrayList<Boolean> conditionList;
 
-    public Monster(String name, List<ElementType> elementTypeList, Stats baseStats, List<Move> moveList,List<Boolean> conditionList) {
+    public Monster(String name, List<ElementType> elementTypeList, Stats baseStats, List<Move> moveList) {
         this.name = name;
         this.elementTypeList = elementTypeList;
         this.baseStats = baseStats;
