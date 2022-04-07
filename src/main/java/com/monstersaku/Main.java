@@ -25,6 +25,7 @@ public class Main {
 
         // inisialisasi
         while (!end) {
+            System.out.printf("Masukkan pilihan Anda: ");
             command = scanner.nextLine();
             if (command.equals("Help")) {
                 help();
@@ -125,7 +126,24 @@ public class Main {
         // attribute
         int turn = 0;
         Integer choice;
-        System.out.println("Inisialisasi...");
+        System.out.printf("Inisialisasi.");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.printf(".");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(".");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         MonsterPool monsterPool = new MonsterPool();
         List<Monster> pool = monsterPool.getPool();
         List<Monster> playerPool1 = new LinkedList<Monster>();
