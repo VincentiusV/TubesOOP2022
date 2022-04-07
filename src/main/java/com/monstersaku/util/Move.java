@@ -3,16 +3,17 @@ package com.monstersaku.util;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Move{
+public abstract class Move{
     protected int id;
     protected String name;
     protected ElementType elementType;
     protected int accuracy;
     protected int priority;
     protected int ammunition;
+    protected String target;
 
     //konstruktor
-    public Move(String name, ElementType elementType, int accuracy, int priority, int ammunition){
+    public Move(String name, ElementType elementType, int accuracy, int priority, int ammunition, String target){
         this.name = name;
         this.elementType = elementType;
         this.accuracy = accuracy;
@@ -69,57 +70,58 @@ public class Move{
         this.ammunition = ammunition;
     }
 
-    public Double getEffectivity(Move move, Monster monster){
+    public Double getEffectivity(Move move, Monster targetMonster){
         Double effectivityFinal = 1.0;
+        ElementEffectivity eleEff = new ElementEffectivity();
 
-        for (int i=0 ; i < monster.elementTypeList.size(); i++){
-            if ((this.getElementType() == ElementType.FIRE) && (monster.getElementType(i) == ElementType.FIRE)){
-                effectivityFinal *= 0.25;
+        for (int i=0 ; i < targetMonster.elementTypeList.size(); i++){
+            if ((this.getElementType() == ElementType.FIRE) && (targetMonster.getElementType(i) == ElementType.FIRE)){
+                effectivityFinal *= eleEff.fireFire;
             }
-            else if ((this.getElementType() == ElementType.FIRE) && (monster.getElementType(i) == ElementType.WATER)){
-                effectivityFinal *= 0.9;
+            else if ((this.getElementType() == ElementType.FIRE) && (targetMonster.getElementType(i) == ElementType.WATER)){
+                effectivityFinal *= eleEff.fireWater;
             }
-            else if ((this.getElementType() == ElementType.FIRE) && (monster.getElementType(i) == ElementType.GRASS)){
-                effectivityFinal *= 1.5;
+            else if ((this.getElementType() == ElementType.FIRE) && (targetMonster.getElementType(i) == ElementType.GRASS)){
+                effectivityFinal *= eleEff.fireGrass;
             }
-            else if ((this.getElementType() == ElementType.FIRE) && (monster.getElementType(i) == ElementType.NORMAL)){
-                effectivityFinal *= 1.5;
+            else if ((this.getElementType() == ElementType.FIRE) && (targetMonster.getElementType(i) == ElementType.NORMAL)){
+                effectivityFinal *= eleEff.fireNormal;
             }
-            else if ((this.getElementType() == ElementType.WATER) && (monster.getElementType(i) == ElementType.FIRE)){
-                effectivityFinal *= 1;
+            else if ((this.getElementType() == ElementType.WATER) && (targetMonster.getElementType(i) == ElementType.FIRE)){
+                effectivityFinal *= eleEff.waterFire;
             }
-            else if ((this.getElementType() == ElementType.WATER) && (monster.getElementType(i) == ElementType.WATER)){
-                effectivityFinal *= 0.25;
+            else if ((this.getElementType() == ElementType.WATER) && (targetMonster.getElementType(i) == ElementType.WATER)){
+                effectivityFinal *= eleEff.waterWater;
             }
-            else if ((this.getElementType() == ElementType.WATER) && (monster.getElementType(i) == ElementType.GRASS)){
-                effectivityFinal *= 1;
+            else if ((this.getElementType() == ElementType.WATER) && (targetMonster.getElementType(i) == ElementType.GRASS)){
+                effectivityFinal *= eleEff.waterGrass;
             }
-            else if ((this.getElementType() == ElementType.WATER) && (monster.getElementType(i) == ElementType.NORMAL)){
-                effectivityFinal *= 1;
+            else if ((this.getElementType() == ElementType.WATER) && (targetMonster.getElementType(i) == ElementType.NORMAL)){
+                effectivityFinal *= eleEff.waterNormal;
             }
-            else if ((this.getElementType() == ElementType.GRASS) && (monster.getElementType(i) == ElementType.FIRE)){
-                effectivityFinal *= 1;
+            else if ((this.getElementType() == ElementType.GRASS) && (targetMonster.getElementType(i) == ElementType.FIRE)){
+                effectivityFinal *= eleEff.grassFire;
             }
-            else if ((this.getElementType() == ElementType.GRASS) && (monster.getElementType(i) == ElementType.WATER)){
-                effectivityFinal *= 1.75;
+            else if ((this.getElementType() == ElementType.GRASS) && (targetMonster.getElementType(i) == ElementType.WATER)){
+                effectivityFinal *= eleEff.grassWater;
             }
-            else if ((this.getElementType() == ElementType.GRASS) && (monster.getElementType(i)) == ElementType.GRASS){
-                effectivityFinal *= 0.25;
+            else if ((this.getElementType() == ElementType.GRASS) && (targetMonster.getElementType(i)) == ElementType.GRASS){
+                effectivityFinal *= eleEff.grassGrass;
             }
-            else if ((this.getElementType() == ElementType.GRASS) && (monster.getElementType(i) == ElementType.NORMAL)){
-                effectivityFinal *= 1;
+            else if ((this.getElementType() == ElementType.GRASS) && (targetMonster.getElementType(i) == ElementType.NORMAL)){
+                effectivityFinal *= eleEff.grassNormal;
             }
-            else if ((this.getElementType() == ElementType.NORMAL) && (monster.getElementType(i) == ElementType.FIRE)){
-                effectivityFinal *= 1;
+            else if ((this.getElementType() == ElementType.NORMAL) && (targetMonster.getElementType(i) == ElementType.FIRE)){
+                effectivityFinal *= eleEff.normalFire;
             }
-            else if ((this.getElementType() == ElementType.NORMAL) && (monster.getElementType(i) == ElementType.WATER)){
-                effectivityFinal *= 1;
+            else if ((this.getElementType() == ElementType.NORMAL) && (targetMonster.getElementType(i) == ElementType.WATER)){
+                effectivityFinal *= eleEff.normalWater;
             }
-            else if ((this.getElementType() == ElementType.NORMAL) && (monster.getElementType(i) == ElementType.GRASS)){
-                effectivityFinal *= 1;
+            else if ((this.getElementType() == ElementType.NORMAL) && (targetMonster.getElementType(i) == ElementType.GRASS)){
+                effectivityFinal *= eleEff.normalGrass;
             }
-            else if ((this.getElementType() == ElementType.NORMAL) && (monster.getElementType(i) == ElementType.NORMAL)){
-                effectivityFinal *= 1;
+            else if ((this.getElementType() == ElementType.NORMAL) && (targetMonster.getElementType(i) == ElementType.NORMAL)){
+                effectivityFinal *= eleEff.normalNormal;
             }
             else{
                 effectivityFinal *= 1;
@@ -127,4 +129,5 @@ public class Move{
         }
         return effectivityFinal;
     }
+    public abstract Monster useMove (Monster sourceMonster, Monster targetMonster);
 }

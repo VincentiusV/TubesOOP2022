@@ -28,20 +28,20 @@ public class MovePool {
     
                 // if the move type is normal move
                 if(line[1].equals("NORMAL")){
-                    NormalMove move = new NormalMove(name, elementType, accuracy, priority, ammunition);
+                    NormalMove move = new NormalMove(name, elementType, accuracy, priority, ammunition, target);
                     pool.add(move);
                 }
                 // if the move type is special move
                 else if(line[1].equals("SPECIAL")){
-                    SpecialMove move = new SpecialMove(name, elementType, accuracy, priority, ammunition);
+                    SpecialMove move = new SpecialMove(name, elementType, accuracy, priority, ammunition, target);
                     pool.add(move);
                 }
                 // If the move type is status move
                 else if(line[1].equals("STATUS")){
-                    String Condition = line[8];
+                    String condition = line[8];
                     Stats changedStats = stringtoStats(line[9]);
 
-                    StatusMove move = new StatusMove(name, elementType, accuracy, priority, ammunition);
+                    StatusMove move = new StatusMove(name, elementType, accuracy, priority, ammunition, condition, target);
                     pool.add(move);
                 }
             }

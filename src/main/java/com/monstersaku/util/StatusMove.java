@@ -9,8 +9,8 @@ public class StatusMove extends Move{
     private int ammunition;
     private String statusCondition;
 
-    public StatusMove(String name, ElementType elementType, int accuracy, int priority, int ammunition, String statusCondition){
-        super(name, elementType, accuracy, priority, ammunition);
+    public StatusMove(String name, ElementType elementType, int accuracy, int priority, int ammunition, String statusCondition, String target){
+        super(name, elementType, accuracy, priority, ammunition, target);
         this.statusCondition = statusCondition;
     }
     public boolean checkStatus(Monster targetMonster){
@@ -24,7 +24,7 @@ public class StatusMove extends Move{
         }
         return check;
     }
-    public void useStatusMove(Monster targetMonster) {
+    public Monster useMove(Monster sourceMonster, Monster targetMonster) {
         switch (statusCondition) {
             case "BURN":
                 if (checkStatus(targetMonster) == true) {
@@ -53,5 +53,6 @@ public class StatusMove extends Move{
             default:
                 break;
         }
+        return targetMonster;
     }
 }
