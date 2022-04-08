@@ -1,8 +1,5 @@
 package com.monstersaku.util;
 
-import java.util.List;
-import java.util.ArrayList;
-
 public abstract class Move{
     protected int id;
     protected String name;
@@ -68,6 +65,10 @@ public abstract class Move{
 
     public void setAmmunition(int ammunition) {
         this.ammunition = ammunition;
+    }
+    
+    public String getTarget(){
+        return this.target;
     }
 
     public Double getEffectivity(Move move, Monster targetMonster){

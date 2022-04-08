@@ -41,7 +41,7 @@ public class MovePool {
                     String condition = line[8];
                     Stats changedStats = stringtoStats(line[9]);
 
-                    StatusMove move = new StatusMove(name, elementType, accuracy, priority, ammunition, condition, target);
+                    StatusMove move = new StatusMove(name, elementType, accuracy, priority, ammunition, condition, changedStats, target);
                     pool.add(move);
                 }
             }

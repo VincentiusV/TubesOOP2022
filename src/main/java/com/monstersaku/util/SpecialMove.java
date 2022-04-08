@@ -17,6 +17,7 @@ public class SpecialMove extends Move{
         Double HPBaru;
         HPBaru = targetMonster.getBaseStats().getHP() - finaldamage;
         targetMonster.getBaseStats().setHP(HPBaru);
+        ammunition -= 1;
         return targetMonster;
     }
 

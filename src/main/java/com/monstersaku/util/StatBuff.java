@@ -34,20 +34,50 @@ public class StatBuff {
     }
 
     // Setter
-    public void setBuffAttack(int times){
-        attack = times;
+    public void setBuffAttack(double times){
+        attack += times;
+        if(attack < -4){
+            attack = -4;
+        }
+        else if(attack > 4){
+            attack = 4;
+        }
     }
-    public void setBuffDefense(int times){
-        defense = times;
+    public void setBuffDefense(double times){
+        defense += times;
+        if(defense < -4){
+            defense = -4;
+        }
+        else if(defense > 4){
+            defense = 4;
+        }    
     }
-    public void setBuffSpecialAttack(int times){
-        specialAttack = times;
+    public void setBuffSpecialAttack(double times){
+        specialAttack += times;
+        if(specialAttack < -4){
+            specialAttack = -4;
+        }
+        else if(specialAttack > 4){
+            specialAttack = 4;
+        }    
     }
-    public void setBuffSpecialDefense(int times){
-        specialDefense = times;
+    public void setBuffSpecialDefense(double times){
+        specialDefense += times;
+        if(specialDefense < -4){
+            specialDefense = -4;
+        }
+        else if(specialDefense > 4){
+            specialDefense = 4;
+        }    
     }
-    public void setBuffSpeed(int times){
-        speed = times;
+    public void setBuffSpeed(double times){
+        speed += times;
+        if(speed < -4){
+            speed = -4;
+        }
+        else if(speed > 4){
+            speed = 4;
+        }
     }
 
     

@@ -7,10 +7,12 @@ public class StatusMove extends Move{
     private int accuracy;
     private int priority;
     private int ammunition;
+    private Stats changedStats;
     private String statusCondition;
 
-    public StatusMove(String name, ElementType elementType, int accuracy, int priority, int ammunition, String statusCondition, String target){
+    public StatusMove(String name, ElementType elementType, int accuracy, int priority, int ammunition, String statusCondition, Stats changedStats, String target){
         super(name, elementType, accuracy, priority, ammunition, target);
+        this.changedStats = changedStats;
         this.statusCondition = statusCondition;
     }
     public boolean checkStatus(Monster targetMonster){
@@ -51,8 +53,24 @@ public class StatusMove extends Move{
             else{targetMonster.setconditionList(3, true);}
                 break;
             default:
-                break;
+            targetMonster.setBaseStats(buffDebuff(targetMonster.getBaseStats(), changedStats));
+            break;
         }
+        ammunition -= 1;
         return targetMonster;
     }
+    public Stats buffDebuff(Stats currStats, Stats affectingStats){
+        double hp = currStats.getHP() + affectingStats.getHP();
+        currStats.setHP(Double.min(currStats.getMaxHP(), hp));
+        
+        StatBuff statBuff = currStats.getStatBuff();
+        statBuff.setBuffAttack(affectingStats.getAttack());
+        statBuff.setBuffDefense(affectingStats.getDefense());
+        statBuff.setBuffSpecialAttack(affectingStats.getSpecialAttack());
+        statBuff.setBuffSpecialAttack(affectingStats.getSpecialDefense());
+        statBuff.setBuffSpeed(affectingStats.getSpeed());
+        currStats.setStatBuff(statBuff);
+        return currStats;
+    }
+
 }

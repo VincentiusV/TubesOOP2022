@@ -10,6 +10,7 @@ import java.lang.System;
 
 public class Stats {
     protected double healthPoint;
+    protected double maxHP;
     protected double attack;
     protected double defense;
     protected double specialAttack;
@@ -28,6 +29,7 @@ public class Stats {
      */
 
     public Stats(double healthPoint, double attack, double defense, double specialAttack, double specialDefense, double speed){
+        this.maxHP = healthPoint;
         this.healthPoint = healthPoint;
         this.attack = attack;
         this.defense = defense;
@@ -44,6 +46,9 @@ public class Stats {
     }
     public double getHP(){
         return healthPoint;
+    }
+    public double getMaxHP(){
+        return maxHP;
     }
     public double getAttack(){
         int buffFactor = statBuff.getBuffAttack();
