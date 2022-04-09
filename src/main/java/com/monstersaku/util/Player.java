@@ -75,6 +75,7 @@ public class Player {
     public void monsterDead(Monster monster){
         if (monster.getBaseStats().getHP() <= 0){
             monsterList.remove(currentMonsterIndex);
+            currentMonsterIndex = -1;
             countMonster -= 1;
         }
     }

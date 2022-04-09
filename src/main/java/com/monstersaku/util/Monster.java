@@ -52,7 +52,7 @@ public class Monster {
         }
         this.name = monster.name;
         this.elementTypeList = monster.elementTypeList;
-        this.baseStats = monster.baseStats;
+        this.baseStats = new Stats(monster.baseStats);
         this.moveList = newMoveList;
         this.condition = monster.getCondition();
     }

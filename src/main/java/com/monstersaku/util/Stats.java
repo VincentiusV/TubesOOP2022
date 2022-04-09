@@ -27,7 +27,6 @@ public class Stats {
      * @param specialDefense
      * @param speed
      */
-
     public Stats(double healthPoint, double attack, double defense, double specialAttack, double specialDefense, double speed){
         this.maxHP = healthPoint;
         this.healthPoint = healthPoint;
@@ -38,7 +37,20 @@ public class Stats {
         this.speed = speed;
         this.statBuff = new StatBuff();
     }
-    
+    /**
+     * Stat buff cloner constructor
+     * @param stat
+     */
+    public Stats(Stats stat){
+        this.maxHP = stat.maxHP;
+        this.healthPoint = stat.healthPoint;
+        this.attack = stat.attack;
+        this.defense = stat.defense;
+        this.specialAttack = stat.specialAttack;
+        this.specialDefense = stat.specialDefense;
+        this.speed = stat.speed;
+        this.statBuff = new StatBuff();
+    }
 
     // Getter
     public StatBuff getStatBuff(){
