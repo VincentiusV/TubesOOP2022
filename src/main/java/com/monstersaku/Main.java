@@ -34,7 +34,7 @@ public class Main {
                 System.out.println("Sampai jumpa!! Semoga Sugar memberkati anda!!");
                 end = true;
             } else if (command.equals("Start Game")) {
-                gameplay(scanner);
+                end = gameplay(scanner);
             } else {
                 System.out.println("Masukan anda salah atuhhh, cuma ada 3 pilihannya!");
                 System.out.println("1. Start Game");
@@ -42,11 +42,12 @@ public class Main {
                 System.out.println("3. Exit");
             }
         }
+        scanner.close();
     }
 
     private static Player addMonster(String name, List<Monster> listName, List<Monster> pool) {
         Random rand = new Random();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 1; i++) {
             listName.add(new Monster(pool.get(Math.abs(rand.nextInt() % 10))));
         }
         Player player = new Player(name, listName);
@@ -66,6 +67,7 @@ public class Main {
             int index = movelist.indexOf(move);
             movelist.set(index, move);
         }
+        else if(move instanceof DefaultMove){}
         else{
             movelist.remove(move);
         }
@@ -113,57 +115,127 @@ public class Main {
         System.out.println();
         return index;
     }
-    private static void printBattleMenu(Monster monster){
+    private static void printBattleMenu(Monster monster, Player player, int skipmove){
+        System.out.printf("%s HP: %.2f%n",monster.getName(), monster.getBaseStats().getHP());
+        System.out.printf("Apa yang akan %s lakukan?%n", monster.getName());
+        System.out.println("==== SELECTION MENU ====");
+        if(skipmove == 1 && player.getMonsterList().size() == 1){
+            System.out.println("--  Move tidak tersedia  --");
+            System.out.println("-- Switch tidak tersedia --");     
+        }
+        else if(skipmove == 1 && player.getMonsterList().size() > 1){
+            System.out.println("--  Move tidak tersedia  --");
+            System.out.println("2. Switch Monster"); 
+        }
+        else if(skipmove == 0 && player.getMonsterList().size() == 1){
+            System.out.println("1. Move");
+            System.out.println("-- Switch tidak tersedia --"); 
+        }
+        else{
+            System.out.println("1. Move");
+            System.out.println("2. Switch Monster");
+        }
+        System.out.println("3. View Monster Info");
+        System.out.println("4. View Game Info");
+        System.out.println("5. Skip");
+        System.out.println();
+        System.out.printf("Pilihan Anda: ");
+    }
+    public static int battleMenu(MonsterPool monsterPool, int turn, Player player, Monster monster,
+            Scanner scanner) {
         int skipmove = 0;
         if(monster.getCondition().get(0) == 3){
             skipmove = 1;
         }
         else if(monster.getCondition().get(0) == 4){
-            skipmove = new Random().nextInt(2);
+            Double randomizer = Math.random();
+            if(randomizer >= 0.75){
+                skipmove = 1;
+            }
+            else{
+                skipmove = 0;
+            }
         }
-        if(skipmove == 1){
-            System.out.printf("%s HP: %.2f%n",monster.getName(), monster.getBaseStats().getHP());
-            System.out.printf("Apa yang akan %s lakukan?%n", monster.getName());
-            System.out.println("==== SELECTION MENU ====");
-            System.out.println("-- Move tidak tersedia --");
-            System.out.println("2. Switch Monster");
-            System.out.println("3. View Monster Info");
-            System.out.println("4. View Game Info");
-            System.out.println();
-            System.out.printf("Pilihan Anda: ");
-        }
-        else{
-            System.out.printf("%s HP: %.2f%n",monster.getName(), monster.getBaseStats().getHP());
-            System.out.printf("Apa yang akan %s lakukan?%n", monster.getName());
-            System.out.println("==== SELECTION MENU ====");
-            System.out.println("1. Move");
-            System.out.println("2. Switch Monster");
-            System.out.println("3. View Monster Info");
-            System.out.println("4. View Game Info");
-            System.out.println();
-            System.out.printf("Pilihan Anda: ");
-        }
-    }
-    public static int battleMenu(MonsterPool monsterPool, int turn, Player player, Monster monster,
-            Scanner scanner) {
-        printBattleMenu(monster);
+        printBattleMenu(monster, player, skipmove);
         Integer choice = scanner.nextInt();
-        while (!choice.equals(1) && !choice.equals(2)) {
-            if (choice.equals(3)) {
-                viewMonsterInfo(monsterPool);
-                printBattleMenu(monster);
-                choice = scanner.nextInt();
-            } else if (choice.equals(4)) {
-                viewGameInfo(monster, player, turn);
-                printBattleMenu(monster);
-                choice = scanner.nextInt();
-                System.out.println();
+        
+        if(skipmove == 1 && player.getMonsterList().size() == 1){
+            while (!choice.equals(5)) {
+                if (choice.equals(3)) {
+                    viewMonsterInfo(monsterPool);
+                    printBattleMenu(monster, player, skipmove);
+                    choice = scanner.nextInt();
+                } else if (choice.equals(4)) {
+                    viewGameInfo(monster, player, turn);
+                    printBattleMenu(monster, player, skipmove);
+                    choice = scanner.nextInt();
+                    System.out.println();
+                } else {
+                    System.out.println("Masukan anda salah atau tidak tersedia.");
+                    System.out.print("Pilihan Anda: ");
+                    choice = scanner.nextInt();
+                }
+            }
+        } 
+        else if(skipmove == 1 && player.getMonsterList().size() > 1){
+            while (!choice.equals(2) && !choice.equals(5)) {
+                System.out.println("wryyyyy");
+                if (choice.equals(3)) {
+                    viewMonsterInfo(monsterPool);
+                    printBattleMenu(monster, player, skipmove);
+                    choice = scanner.nextInt();
+                } else if (choice.equals(4)) {
+                    viewGameInfo(monster, player, turn);
+                    printBattleMenu(monster, player, skipmove);
+                    choice = scanner.nextInt();
+                    System.out.println();
+                } else {
+                    System.out.println("Masukan anda salah atau tidak tersedia.");
+                    System.out.print("Pilihan Anda: ");
+                    choice = scanner.nextInt();
+                }
+            }
+        }
+        else if(skipmove == 0 && player.getMonsterList().size() == 1){
+            while (!choice.equals(1) && !choice.equals(5)) {
+                if (choice.equals(3)) {
+                    viewMonsterInfo(monsterPool);
+                    printBattleMenu(monster, player, skipmove);
+                    choice = scanner.nextInt();
+                } else if (choice.equals(4)) {
+                    viewGameInfo(monster, player, turn);
+                    printBattleMenu(monster, player, skipmove);
+                    choice = scanner.nextInt();
+                    System.out.println();
+                } else {
+                    System.out.println("Masukan anda salah atau tidak tersedia.");
+                    System.out.print("Pilihan Anda: ");
+                    choice = scanner.nextInt();
+                }
+            }
+        }
+        else {
+            while (!choice.equals(1) && !choice.equals(2) && !choice.equals(5)) {
+                if (choice.equals(3)) {
+                    viewMonsterInfo(monsterPool);
+                    printBattleMenu(monster, player, skipmove);
+                    choice = scanner.nextInt();
+                } else if (choice.equals(4)) {
+                    viewGameInfo(monster, player, turn);
+                    printBattleMenu(monster, player, skipmove);
+                    choice = scanner.nextInt();
+                    System.out.println();
+                }  else {
+                    System.out.println("Masukan anda salah atau tidak tersedia.");
+                    System.out.print("Pilihan Anda: ");
+                    choice = scanner.nextInt();
+                }
             }
         }
         return choice;
     }
 
-    public static Monster dOTeffect(Monster monster) {
+    public static Monster dOTeffect(Monster monster, int turn) {
         ArrayList<Integer> condition = monster.getCondition();
         Stats bStats = monster.getBaseStats();
         double hp = bStats.getHP();
@@ -171,17 +243,28 @@ public class Main {
         switch (condition.get(0)) {
             case 1:
                 bStats.setHP(hp - maxHP/8);
+                System.out.printf("%s mendapatkan damage sebesar %.2f akibat BURN!!!%n", monster.getName(), maxHP/8);
                 break;
             case 2:
                 bStats.setHP(hp - maxHP/16);
+                System.out.printf("%s mendapatkan damage sebesar %.2f akibat POISON!!!%n", monster.getName(), maxHP/16);
                 break;
+            case 3:
+                if(condition.get(1) <= turn){
+                    condition.set(0, 0);
+                    System.out.printf("%s akhirnya terbangun!!!%n", monster.getName());
+                }
+                else {
+                    System.out.printf("%s masih tertidur dengan lelap...%n", monster.getName());
+                }
             default:
                 break;
         }
+        monster.setBaseStats(bStats);
         return monster;
     }
 
-    public static void gameplay(Scanner scanner) {
+    public static boolean gameplay(Scanner scanner) {
         // attribute
         int turn = 0;
         Integer choice;
@@ -238,7 +321,6 @@ public class Main {
                     player1.setCurrentMonsterIndex(selectMonster(player1, scanner));
                     monster1 = player1.getMonsterList().get(player1.getCurrentMonsterIndex());
                 } else {
-
                     System.out.printf("%s turn.%n", player1.getPlayerName());
                     choice = battleMenu(monsterPool, turn, player1, monster1, scanner);
                     if (choice.equals(1)) {
@@ -284,7 +366,7 @@ public class Main {
                             urutanType = 2;
                         }
                         else{
-                            urutanType = new Random().nextInt(2) + 1;
+                            urutanType = 1 + (int)(Math.random() + 1);
                         }
                     }
                     else if(monsterMove1.getPriority() < monsterMove2.getPriority()){
@@ -335,6 +417,9 @@ public class Main {
                         break;
                     }
                 }
+                else if(monsterMove1 == null && monsterMove2 == null){
+                    // nothing happen
+                }
                 else if(monsterMove2 == null){
                     if(monsterMove1.getTarget() == "OWN"){
                         monsterMove1.useMove(monster1, monster1, turn);
@@ -353,18 +438,24 @@ public class Main {
                     monster2.setMoveList(giveRenewedMove(monsterMove2, monster2.getMoveList()));
                     monsterMove2 = null;
                 }
+                // DOT in effect
+                monster1 = dOTeffect(monster1, turn);
+                monster2 = dOTeffect(monster2, turn);
             }
-            if(player1.isHaveMonster()){
+            if(!player1.isHaveMonster() && !player2.isHaveMonster()){
+                System.out.println("Permainan telah berakhir! PERMAINAN BERAKHIR SERI!!!");
+            }
+            else if(player1.isHaveMonster()){
                 System.out.printf("Permainan telah berakhir! Pemenangnya adalah... %s!!!%n", player1.getPlayerName());
             } else if(player2.isHaveMonster()){
                 System.out.printf("Permainan telah berakhir! Pemenangnya adalah... %s!!!%n", player2.getPlayerName());
             }
 
-            scanner.close();
         } catch (Exception e) {
             System.out.println(e);
         }
         System.out.println("=== === END === ===");
+        return true;
     }
 
     public static void help() {

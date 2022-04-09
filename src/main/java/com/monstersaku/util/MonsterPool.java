@@ -114,7 +114,6 @@ public class MonsterPool {
     private List<Move> moveCompare(String input){
         String[] arrString = input.split(",");
         List<Move> monsterMove = new LinkedList<Move>();
-
         for(String idString : arrString){
             int id = Integer.parseInt(idString);
             Move move = movelist.get(id-1);

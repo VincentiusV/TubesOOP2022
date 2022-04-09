@@ -1,7 +1,5 @@
 package com.monstersaku.util;
 
-import java.util.Random;
-
 public class StatusMove extends Move{
     private Stats changedStats;
     private String statusCondition;
@@ -39,7 +37,7 @@ public class StatusMove extends Move{
             case "SLEEP": // SLEEP
                 System.out.printf("%s Mendapatkan status SLEEP!!! %n", targetMonster.getName());
                 System.out.printf("%s mendengkur dengan cukup kuat...%n", targetMonster.getName());
-                int ended = turn + new Random().nextInt(7) + 1;
+                int ended = turn + 1 + (int)(Math.random() * 6 + 1);
                 targetMonster.setconditionList(3, ended);
                 break;
             case "PARALYZE": // PARALYZE

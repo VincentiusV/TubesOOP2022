@@ -30,6 +30,10 @@ public class Monster {
         List<Move> monsterMove = monster.getMoveList();
         List<Move> newMoveList = new LinkedList<Move>();
         Move newmove;
+        // default
+        newMoveList.add(new DefaultMove());
+
+        // taking from config file
         for(Move move : monsterMove){
             if (move.getClass().getSimpleName().equals("StatusMove")) {
                 StatusMove statusMove = (StatusMove) move;
@@ -37,9 +41,12 @@ public class Monster {
             } else if (move.getClass().getSimpleName().equals("NormalMove")) {
                 NormalMove normalMove = (NormalMove) move;
                 newmove = new NormalMove(normalMove);
-            } else {
+            } else if (move.getClass().getSimpleName().equals("SpecialMove")){
                 SpecialMove specialMove = (SpecialMove) move;
                 newmove = new SpecialMove(specialMove);
+            } else{
+                DefaultMove defaultMove = (DefaultMove) move;
+                newmove = new DefaultMove(defaultMove);
             }
             newMoveList.add(newmove);
         }
@@ -140,16 +147,21 @@ public class Monster {
                 System.out.println("SPECIAL MOVE");
             } else if (move instanceof StatusMove) {
                 System.out.println("STATUS MOVE");
+            } else if (move instanceof DefaultMove){
+                System.out.println("NORMAL MOVE");
             }
 
             // print Stats of move
             System.out.println("Accuracy      : " + move.getAccuracy());
             System.out.println("Priority      : " + move.getPriority());
-            System.out.println("Ammunition    : " + move.getAmmunition());
+            if(move.getAmmunition() > 0){
+                System.out.println("Ammunition    : " + move.getAmmunition());
+            }
+            else if(move.getAmmunition() == -1){
+                System.out.println("Ammunition    : INFINITE");
+            }
         }
     }
-
-    
 
     public boolean isDead() {
         return (getBaseStats().getHP() <= 0);
