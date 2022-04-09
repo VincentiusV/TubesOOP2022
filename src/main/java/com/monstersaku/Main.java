@@ -9,11 +9,20 @@ public class Main {
         String command;
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Monster Saku");
-        System.out.printf("%n%n%n");
-        System.out.println("1. Start Game");
-        System.out.println("2. Help");
-        System.out.println("3. Exit");
+        System.out.println(" \u001B[30m\b __  __  ____  _   _  _____ _______ ______ _____     _____         _  ___    _ ");
+        System.out.println(" \b|  \\/  |/ __ \\| \\ | |/ ____|__   __|  ____|  __ \\   / ____|  /\\   | |/ / |  | |\u001B[30m");
+        System.out.println(" \u001B[30m\b| \\  / | |  | |  \\| | (___    | |  | |__  | |__) | | (___   /  \\  | ' /| |  | |\u001B[30m");
+        System.out.println(" \u001B[31m\b| |\\/| | |  | | . ` |\\___ \\   | |  |  __| |  _  /   \\___ \\ / /\\ \\ |  < | |  | |");
+        System.out.println(" \u001B[31m\b| |  | | |__| | |\\  |____) |  | |  | |____| | \\ \\   ____) / ____ \\| . \\| |__| |");
+        System.out.println(" \u001B[37m\b|_|  |_|\\____/|_| \\_|_____/   |_|  |______|_|  \\_\\ |_____/_/    \\_\\_|\\_\\\\____/ \u001B[37m");
+        
+        System.out.println(" \n\n\t\t    \033[0;103m                              \u001B[0m");
+        System.out.println(" \t\t    \033[0;103m  \u001B[0m\t                     \t\t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
+        System.out.println(" \t\t    \033[0;103m  \u001B[0m\t\t \b\b\b\b\033[1;96mStart Game\033[0m         \t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
+        System.out.println(" \t\t    \033[0;103m  \u001B[0m\t\t\t \b\b\b\b\b\b\b\b\b\033[1;97mHelp\033[0m               \b\b\b\033[0;103m  \u001B[0m");
+        System.out.println(" \t\t    \033[0;103m  \u001B[0m\t\t\t \b\b\b\b\b\b\b\b\b\033[1;97mExit\033[0m                  \b\b\b\b\b\b\033[0;103m  \u001B[0m");
+        System.out.println(" \t\t    \033[0;103m  \u001B[0m\t                     \t\t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
+        System.out.println(" \t\t    \033[0;103m                              \u001B[0m\n");
 
         // inisialisasi
         while (!end) {
@@ -176,7 +185,7 @@ public class Main {
         // attribute
         int turn = 0;
         Integer choice;
-        System.out.printf("Inisialisasi.");
+        System.out.printf("Loading.");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -359,7 +368,12 @@ public class Main {
     }
 
     public static void help() {
-        System.out.println("}ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ HELP ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ{");
+        System.out.println(" \t\t\t \u001B[30m       __  __     __    ");
+        System.out.println(" \t\t\t       / / / /__  / /___ \u001B[0m");
+        System.out.println(" \t\t\t\u001B[30m      / /_/ / _ \\/ / __ \\\u001B[0m");
+        System.out.println(" \t\t\t\u001B[31m     / __  /  __/ / /_/ /\u001B[0m");
+        System.out.println(" \t\t\t\u001B[31m    /_/ /_/\\___/_/ .___/ ");
+        System.out.println(" \t\t\t                 /_/      \u001B[0m\n");
         System.out.println("Selamat Datang di MONSTER SAKU!! (definitely not pokemon rip off");
         System.out.println();
         System.out.println("Permainan hanya akan selesai jika minimal 1 pemain tidak memiliki monster sehat walafiat");
