@@ -17,12 +17,12 @@ public class SpecialMove extends Move {
         if(sourceMonster.getCondition().get(0) == 1){
             finaldamage = (float) Math.floor((((sourceMonster.getBaseStats().getSpecialAttack())
                 / (targetMonster.getBaseStats().getSpecialDefense())) + 2)
-                * Math.floor(Math.random() * (1 - 0.85) + 0.85) * getEffectivity(this, targetMonster) * 0.5);
+                * Math.floor(Math.random() * (1 - 0.85 + 1) + 0.85) * getEffectivity(this, targetMonster) * 0.5);
         }
         else{
             finaldamage = (float) Math.floor((((sourceMonster.getBaseStats().getSpecialAttack())
                 / (targetMonster.getBaseStats().getSpecialDefense())) + 2)
-                * Math.floor(Math.random() * (1 - 0.85) + 0.85) * getEffectivity(this, targetMonster));
+                * Math.floor(Math.random() * (1 - 0.85 + 1) + 0.85) * getEffectivity(this, targetMonster));
         }
         Double HPBaru;
         HPBaru = targetMonster.getBaseStats().getHP() - finaldamage;

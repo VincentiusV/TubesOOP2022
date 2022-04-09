@@ -17,12 +17,12 @@ public class NormalMove extends Move {
         if(sourceMonster.getCondition().get(0) == 1){ // monster kondisi BURN
             finaldamage = (float) Math
                 .floor((((sourceMonster.getBaseStats().getAttack()) / (targetMonster.getBaseStats().getDefense())) + 2)
-                        * Math.floor(Math.random() * (1 - 0.85) + 0.85) * getEffectivity(this, targetMonster) * 0.5);
+                        * Math.floor(Math.random() * (1 - 0.85 + 1) + 0.85) * getEffectivity(this, targetMonster) * 0.5);
         }
         else{
             finaldamage = (float) Math
                 .floor((((sourceMonster.getBaseStats().getAttack()) / (targetMonster.getBaseStats().getDefense())) + 2)
-                        * Math.floor(Math.random() * (1 - 0.85) + 0.85) * getEffectivity(this, targetMonster));
+                        * Math.floor(Math.random() * (1 - 0.85 + 1) + 0.85) * getEffectivity(this, targetMonster));
         }
         Double HPBaru;
         HPBaru = targetMonster.getBaseStats().getHP() - finaldamage;
