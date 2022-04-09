@@ -1,6 +1,7 @@
 package com.monstersaku.util;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Monster {
@@ -8,28 +9,46 @@ public class Monster {
     protected List<ElementType> elementTypeList;
     protected Stats baseStats;
     private List<Move> moveList;
-    private ArrayList<Boolean> conditionList;
+    private ArrayList<Integer> condition;
+    // condition[0] berisi integer yang menandakan effect saat ini. Jika bernilai 0, artinya tidak dalam kondisi abnormal.
+    // condition[0] = 1. Burn 2. Poison 3. Sleep 4. Paralyze
+    // condition[1] berisi integer yang menandakan kapan kondisi akan berhenti. Jika bernilai -1, artinya effect tidak akan hilang
 
     public Monster(String name, List<ElementType> elementTypeList, Stats baseStats, List<Move> moveList) {
         this.name = name;
         this.elementTypeList = elementTypeList;
         this.baseStats = baseStats;
         this.moveList = moveList;
-        this.conditionList = new ArrayList<Boolean>();
-        for (int i = 0; i < 4; i++) {
-            conditionList.add(false); //0. Burn 1. Poison 2. Sleep 3. Paralyze
+        this.condition = new ArrayList<Integer>();
+        for (int i = 0; i < 2; i++) {
+            condition.add(0);
         }
-        
-        
     }
-    
-        public Monster(String name, List<ElementType> elementTypeList, Stats baseStats) {
-            this.name = name;
-            this.elementTypeList = elementTypeList;
-            this.baseStats = baseStats;
-        }      
-            ;
 
+    // clone consstructor
+    public Monster(Monster monster){
+        List<Move> monsterMove = monster.getMoveList();
+        List<Move> newMoveList = new LinkedList<Move>();
+        Move newmove;
+        for(Move move : monsterMove){
+            if (move.getClass().getSimpleName().equals("StatusMove")) {
+                StatusMove statusMove = (StatusMove) move;
+                newmove = new StatusMove(statusMove);
+            } else if (move.getClass().getSimpleName().equals("NormalMove")) {
+                NormalMove normalMove = (NormalMove) move;
+                newmove = new NormalMove(normalMove);
+            } else {
+                SpecialMove specialMove = (SpecialMove) move;
+                newmove = new SpecialMove(specialMove);
+            }
+            newMoveList.add(newmove);
+        }
+        this.name = monster.name;
+        this.elementTypeList = monster.elementTypeList;
+        this.baseStats = monster.baseStats;
+        this.moveList = newMoveList;
+        this.condition = monster.getCondition();
+    }
 
     public String getName() {
         return name;
@@ -39,7 +58,7 @@ public class Monster {
         return elementTypeList;
     }
 
-    public ElementType getElementType(int i){
+    public ElementType getElementType(int i) {
         return elementTypeList.get(i);
     }
 
@@ -50,8 +69,16 @@ public class Monster {
     public List<Move> getMoveList() {
         return moveList;
     }
-    public Boolean getconditionList(int i){
-        return conditionList.get(i);
+
+    /**
+     * Mengembalikan condition dalam bentuk array.
+     * condition.get(0) untuk mendapatkan tipe kondisi abnormal
+     *  1. Burn 2. Poison 3. Sleep 4. Paralyze
+     * condition.get(1) untuk mendapatkan lama kondisi bertahan
+     * @return condition
+     */
+    public ArrayList<Integer> getCondition() {
+        return condition;
     }
 
     public void setName(String name) {
@@ -69,20 +96,26 @@ public class Monster {
     public void setMoveList(List<Move> moveList) {
         this.moveList = moveList;
     }
+    
 
-    public void setconditionList(int i, boolean state){
-        conditionList.set(i, state);
+    /**
+     * Mengubah atribute condition.
+     * @param condition_type
+     * @param turn
+     */
+    public void setconditionList(int condition_type, int turn) {
+        condition.set(0, condition_type);
+        condition.set(1, turn);
     }
 
     // numpang print monster move
-    public void printMonsterMoves(){
+    public void printMonsterMoves() {
         System.out.println("}=== MOVE LIST ========================{");
         for (Move move : moveList) {
             System.out.println();
             String name = move.getName();
             ElementType elementType = move.getElementType();
 
-            
             System.out.print(String.format("%d.%s ", moveList.indexOf(move), name));
             System.out.print("=".repeat(26 - name.length()));
             System.out.println("{");
@@ -115,30 +148,9 @@ public class Monster {
             System.out.println("Ammunition    : " + move.getAmmunition());
         }
     }
+
     
 
-    // Coba-coba aja
-    public void fight(Monster monster){
-        if (this.getBaseStats().getAttack() > monster.getBaseStats().getDefense()){
-            if (this.getBaseStats().getAttack()-monster.getBaseStats().getHP() >= 0){
-                Stats newStats = new Stats(monster.getBaseStats().getHP() - (this.getBaseStats().getAttack()-monster.getBaseStats().getDefense()),
-                        monster.getBaseStats().getAttack(), monster.getBaseStats().getDefense(),
-                        monster.getBaseStats().getSpecialAttack(), monster.getBaseStats().getSpecialDefense(),
-                        monster.getBaseStats().getSpeed());
-                monster.setBaseStats(newStats);
-            }
-            else{
-                Stats newStats = new Stats(0,
-                        monster.getBaseStats().getAttack(), monster.getBaseStats().getDefense(),
-                        monster.getBaseStats().getSpecialAttack(), monster.getBaseStats().getSpecialDefense(),
-                        monster.getBaseStats().getSpeed());
-                monster.setBaseStats(newStats);
-            }
-        }
-        else{
-            System.out.println(this.getName()+" gagal menyerang "+monster.getName());
-        }
-    }
     public boolean isDead() {
         return (getBaseStats().getHP() <= 0);
     }

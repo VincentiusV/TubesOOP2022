@@ -38,11 +38,12 @@ public class Main {
     private static Player addMonster(String name, List<Monster> listName, List<Monster> pool) {
         Random rand = new Random();
         for (int i = 0; i < 6; i++) {
-            listName.add(pool.get(Math.abs(rand.nextInt() % 10)));
+            listName.add(new Monster(pool.get(Math.abs(rand.nextInt() % 10))));
         }
         Player player = new Player(name, listName);
         return player;
     }
+
 
     // method game
     /**
@@ -62,11 +63,11 @@ public class Main {
         return movelist;
     }
 
-    public static Move chooseMove(Monster monster1, Monster monster2, Scanner scanner) {
+    public static Move chooseMove(Monster monster1, Scanner scanner) {
         monster1.printMonsterMoves();
-        System.out.printf("Pilih move apa yang akan dilakukan oleh %s kepada %s: %n", monster1.getName(),
-                monster2.getName());
+        System.out.printf("Pilih move apa yang akan dilakukan oleh %s: ", monster1.getName());
         int index = scanner.nextInt();
+        System.out.println();
         while (index >= monster1.getMoveList().size() || index < 0) {
             // saya ada ide buat nerapin exception tapi mengmager
             System.out.println("Input diluar range daftar move monster");
@@ -84,7 +85,7 @@ public class Main {
     public static int selectMonster(Player player, Scanner scanner) {
         System.out.printf("Pilihan Monster %s: %n", player.getPlayerName());
         player.printMonsterList();
-        System.out.printf("Monster yang akan digunakan %s: ", player.getPlayerName());
+        System.out.printf("Id monster yang akan digunakan %s: ", player.getPlayerName());
         int index = scanner.nextInt();
         List<Monster> monsterlist = player.getMonsterList();
         int currindex = player.getCurrentMonsterIndex();
@@ -103,41 +104,49 @@ public class Main {
         System.out.println();
         return index;
     }
-
+    private static void printBattleMenu(Monster monster){
+        int skipmove = 0;
+        if(monster.getCondition().get(0) == 3){
+            skipmove = 1;
+        }
+        else if(monster.getCondition().get(0) == 4){
+            skipmove = new Random().nextInt(2);
+        }
+        if(skipmove == 1){
+            System.out.printf("%s HP: %.2f%n",monster.getName(), monster.getBaseStats().getHP());
+            System.out.printf("Apa yang akan %s lakukan?%n", monster.getName());
+            System.out.println("==== SELECTION MENU ====");
+            System.out.println("-- Move tidak tersedia --");
+            System.out.println("2. Switch Monster");
+            System.out.println("3. View Monster Info");
+            System.out.println("4. View Game Info");
+            System.out.println();
+            System.out.printf("Pilihan Anda: ");
+        }
+        else{
+            System.out.printf("%s HP: %.2f%n",monster.getName(), monster.getBaseStats().getHP());
+            System.out.printf("Apa yang akan %s lakukan?%n", monster.getName());
+            System.out.println("==== SELECTION MENU ====");
+            System.out.println("1. Move");
+            System.out.println("2. Switch Monster");
+            System.out.println("3. View Monster Info");
+            System.out.println("4. View Game Info");
+            System.out.println();
+            System.out.printf("Pilihan Anda: ");
+        }
+    }
     public static int battleMenu(MonsterPool monsterPool, int turn, Player player, Monster monster,
             Scanner scanner) {
-        System.out.printf("%s HP: %.2f%n",monster.getName(), monster.getBaseStats().getHP());
-        System.out.printf("Apa yang akan %s lakukan?%n", monster.getName());
-        System.out.println("==== SELECTION MENU ====");
-        System.out.println("1. Move");
-        System.out.println("2. Switch Monster");
-        System.out.println("3. View Monster Info");
-        System.out.println("4. View Game Info");
-        System.out.println();
-        System.out.printf("Pilihan Anda: ");
+        printBattleMenu(monster);
         Integer choice = scanner.nextInt();
         while (!choice.equals(1) && !choice.equals(2)) {
             if (choice.equals(3)) {
                 viewMonsterInfo(monsterPool);
-                System.out.printf("Apa yang akan %s lakukan?%n", monster.getName());
-                System.out.println("==== SELECTION MENU ====");
-                System.out.println("1. Move");
-                System.out.println("2. Switch Monster");
-                System.out.println("3. View Monster Info");
-                System.out.println("4. View Game Info");
-                System.out.println();
-                System.out.printf("Pilihan Anda: ");
+                printBattleMenu(monster);
                 choice = scanner.nextInt();
             } else if (choice.equals(4)) {
                 viewGameInfo(monster, player, turn);
-                System.out.printf("Apa yang akan %s lakukan?%n", monster.getName());
-                System.out.println("==== SELECTION MENU ====");
-                System.out.println("1. Move");
-                System.out.println("2. Switch Monster");
-                System.out.println("3. View Monster Info");
-                System.out.println("4. View Game Info");
-                System.out.println();
-                System.out.printf("Pilihan Anda: ");
+                printBattleMenu(monster);
                 choice = scanner.nextInt();
                 System.out.println();
             }
@@ -146,8 +155,19 @@ public class Main {
     }
 
     public static Monster dOTeffect(Monster monster) {
-        if (monster.getconditionList(0)) {
-
+        ArrayList<Integer> condition = monster.getCondition();
+        Stats bStats = monster.getBaseStats();
+        double hp = bStats.getHP();
+        double maxHP = bStats.getMaxHP();
+        switch (condition.get(0)) {
+            case 1:
+                bStats.setHP(hp - maxHP/8);
+                break;
+            case 2:
+                bStats.setHP(hp - maxHP/16);
+                break;
+            default:
+                break;
         }
         return monster;
     }
@@ -198,7 +218,7 @@ public class Main {
             // start gameloop
             while (player1.isHaveMonster() && player2.isHaveMonster()) {
                 turn += 1;
-                System.out.printf("TURN %d.", turn);
+                System.out.printf("%nTURN %d.%n", turn);
                 // Player 1 Choosing Action
 
                 if (monster1.isDead()) {
@@ -213,10 +233,11 @@ public class Main {
                     System.out.printf("%s turn.%n", player1.getPlayerName());
                     choice = battleMenu(monsterPool, turn, player1, monster1, scanner);
                     if (choice.equals(1)) {
-                        monsterMove1 = chooseMove(monster1, monster2, scanner);
+                        monsterMove1 = chooseMove(monster1, scanner);
 
                     } else if (choice.equals(2)) { // select monster
                         // set new monster for player 1
+                        monster1.getBaseStats().getStatBuff().resetBuff();
                         player1.setCurrentMonsterIndex(selectMonster(player1, scanner));
                         monster1 = player1.getMonsterList().get(player1.getCurrentMonsterIndex());
                     }
@@ -236,7 +257,7 @@ public class Main {
                     System.out.printf("%s turn.%n", player2.getPlayerName());
                     choice = battleMenu(monsterPool, turn, player2, monster2, scanner);
                     if (choice.equals(1)) {
-                        monsterMove2 = chooseMove(monster2, monster1, scanner);
+                        monsterMove2 = chooseMove(monster2, scanner);
                     } else if (choice.equals(2)) { // select monster
                         player2.setCurrentMonsterIndex(selectMonster(player2, scanner));
                         monster2 = player2.getMonsterList().get(player2.getCurrentMonsterIndex());
@@ -247,10 +268,10 @@ public class Main {
                 int urutanType = 0;
                 if(monsterMove1 != null && monsterMove2 != null){
                     if(monsterMove1.getPriority() == monsterMove2.getPriority()){
-                        if(monster1.getBaseStats().getSpeed() > monster2.getBaseStats().getSpeed()){
+                        if(monster1.getBaseStats().getSpeed(monster1.getCondition().get(0)) > monster2.getBaseStats().getSpeed(monster2.getCondition().get(0))){
                             urutanType = 1;
                         }
-                        else if(monster1.getBaseStats().getSpeed() < monster2.getBaseStats().getSpeed()){
+                        else if(monster1.getBaseStats().getSpeed(monster1.getCondition().get(0)) < monster2.getBaseStats().getSpeed(monster2.getCondition().get(0))){
                             urutanType = 2;
                         }
                         else{
@@ -267,18 +288,18 @@ public class Main {
                         case 1:
                         // player 1 do the thing
                         if(monsterMove1.getTarget() == "OWN"){
-                            monsterMove1.useMove(monster1, monster1);
+                            monsterMove1.useMove(monster1, monster1, turn);
                         } else{
-                            monsterMove1.useMove(monster1, monster2);
+                            monsterMove1.useMove(monster1, monster2, turn);
                         }
                         monster1.setMoveList(giveRenewedMove(monsterMove1, monster1.getMoveList()));
                         monsterMove1 = null;
 
                         // player 2 do the thing
                         if(monsterMove2.getTarget() == "OWN"){
-                            monsterMove2.useMove(monster2, monster2);
+                            monsterMove2.useMove(monster2, monster2, turn);
                         } else{
-                            monsterMove2.useMove(monster2, monster1);
+                            monsterMove2.useMove(monster2, monster1, turn);
                         }
                         monster2.setMoveList(giveRenewedMove(monsterMove2, monster2.getMoveList()));
                         monsterMove2 = null;
@@ -287,23 +308,41 @@ public class Main {
                         case 2:
                         // player 2 do the thing
                         if(monsterMove2.getTarget() == "OWN"){
-                            monsterMove2.useMove(monster2, monster2);
+                            monsterMove2.useMove(monster2, monster2, turn);
                         } else{
-                            monsterMove2.useMove(monster2, monster1);
+                            monsterMove2.useMove(monster2, monster1, turn);
                         }
                         monster2.setMoveList(giveRenewedMove(monsterMove2, monster2.getMoveList()));
                         monsterMove2 = null;
 
                         // player 1 do the thing
                         if(monsterMove1.getTarget() == "OWN"){
-                            monsterMove1.useMove(monster1, monster1);
+                            monsterMove1.useMove(monster1, monster1, turn);
                         } else{
-                            monsterMove1.useMove(monster1, monster2);
+                            monsterMove1.useMove(monster1, monster2, turn);
                         }
                         monster1.setMoveList(giveRenewedMove(monsterMove1, monster1.getMoveList()));
                         monsterMove1 = null;
                         break;
                     }
+                }
+                else if(monsterMove2 == null){
+                    if(monsterMove1.getTarget() == "OWN"){
+                        monsterMove1.useMove(monster1, monster1, turn);
+                    } else{
+                        monsterMove1.useMove(monster1, monster2, turn);
+                    }
+                    monster1.setMoveList(giveRenewedMove(monsterMove1, monster1.getMoveList()));
+                    monsterMove1 = null;
+                }
+                else if(monsterMove1 == null){
+                    if(monsterMove2.getTarget() == "OWN"){
+                        monsterMove2.useMove(monster2, monster2, turn);
+                    } else{
+                        monsterMove2.useMove(monster2, monster1, turn);
+                    }
+                    monster2.setMoveList(giveRenewedMove(monsterMove2, monster2.getMoveList()));
+                    monsterMove2 = null;
                 }
             }
             if(player1.isHaveMonster()){
@@ -347,7 +386,7 @@ public class Main {
         System.out.printf("Sekarang turn %d%n%n%n", turn);
         System.out.printf("Monster yang digunakan saat ini:%n%n%n");
         System.out.println("Stats: ");
-        monster.getBaseStats().printStats();
+        monster.getBaseStats().printStats(monster.getCondition().get(0));
         System.out.println("Move: ");
         monster.printMonsterMoves();
         player.printMonsterList();

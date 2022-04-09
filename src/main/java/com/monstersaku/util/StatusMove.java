@@ -1,12 +1,8 @@
 package com.monstersaku.util;
 
+import java.util.Random;
+
 public class StatusMove extends Move{
-    private int id;
-    private String name;
-    private ElementType elementType;
-    private int accuracy;
-    private int priority;
-    private int ammunition;
     private Stats changedStats;
     private String statusCondition;
 
@@ -15,48 +11,46 @@ public class StatusMove extends Move{
         this.changedStats = changedStats;
         this.statusCondition = statusCondition;
     }
-    public boolean checkStatus(Monster targetMonster){
-        int i = 0;
-        boolean check = false;
-        while (i<3) {
-            if (targetMonster.getconditionList(i) == true) {
-                check = true;
-                break;
-            }
-        }
-        return check;
+    // Clone Constructor
+    public StatusMove(StatusMove move){
+        super(move.name, move.elementType, move.accuracy, move.priority, move.ammunition, move.target);
+        this.changedStats = move.changedStats;
+        this.statusCondition = move.statusCondition;
     }
-    public Monster useMove(Monster sourceMonster, Monster targetMonster) {
+    
+    public String getStatusCondition(){
+        return statusCondition;
+    }
+
+    public Stats getChangedStats(){
+        return changedStats;
+    }
+    public Monster useMove(Monster sourceMonster, Monster targetMonster, int turn) {
+        System.out.printf("%s menggunakan move %s kepada %s! ", sourceMonster.getName(), name, targetMonster.getName());
         switch (statusCondition) {
-            case "BURN":
-                if (checkStatus(targetMonster) == true) {
-                    System.out.println("gabisa ni");
-                }
-                else{targetMonster.setconditionList(0, true);}
+            case "BURN": // BURN
+                System.out.printf("%s Mendapatkan status BURN!!! %n", targetMonster.getName());
+                targetMonster.setconditionList(1,-1);
                 break;
-            case "POISON":
-            if (checkStatus(targetMonster) == true) {
-                System.out.println("gabisa ni");
-            }
-            else{targetMonster.setconditionList(1, true);}
+            case "POISON": // POISON
+                System.out.printf("%s Mendapatkan status POISON!!! %n", targetMonster.getName());
+                targetMonster.setconditionList(2,-1);
                 break;
-            case "PARALYZE":
-            if (checkStatus(targetMonster) == true) {
-                System.out.println("gabisa ni");
-            }
-            else{targetMonster.setconditionList(2, true);}
+            case "SLEEP": // SLEEP
+                System.out.printf("%s Mendapatkan status SLEEP!!! %n", targetMonster.getName());
+                System.out.printf("%s mendengkur dengan cukup kuat...%n", targetMonster.getName());
+                int ended = turn + new Random().nextInt(7) + 1;
+                targetMonster.setconditionList(3, ended);
                 break;
-            case "SLEEP":
-            if (checkStatus(targetMonster) == true) {
-                System.out.println("gabisa ni");
-            }
-            else{targetMonster.setconditionList(3, true);}
+            case "PARALYZE": // PARALYZE
+                System.out.printf("%s Mendapatkan status PARALYZE!!! %n", targetMonster.getName());
+                targetMonster.setconditionList(4,-1);
                 break;
             default:
             targetMonster.setBaseStats(buffDebuff(targetMonster.getBaseStats(), changedStats));
             break;
         }
-        ammunition -= 1;
+        super.ammunition -= 1;
         return targetMonster;
     }
     public Stats buffDebuff(Stats currStats, Stats affectingStats){
@@ -68,7 +62,7 @@ public class StatusMove extends Move{
         statBuff.setBuffDefense(affectingStats.getDefense());
         statBuff.setBuffSpecialAttack(affectingStats.getSpecialAttack());
         statBuff.setBuffSpecialAttack(affectingStats.getSpecialDefense());
-        statBuff.setBuffSpeed(affectingStats.getSpeed());
+        statBuff.setBuffSpeed(affectingStats.getSpeed(0));
         currStats.setStatBuff(statBuff);
         return currStats;
     }

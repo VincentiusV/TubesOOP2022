@@ -68,7 +68,7 @@ public class Player {
                     System.out.println("GRASS");
                 }
             }
-            stat.printStats();
+            stat.printStats(0);
             index += 1;
         }
     }

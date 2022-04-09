@@ -156,7 +156,7 @@ public class MonsterPool {
                 }
             }
             // print Monster Stats
-            stat.printStats();
+            stat.printStats(0);
 
             // print Move set Monster
             System.out.println("MOVE SET : ");

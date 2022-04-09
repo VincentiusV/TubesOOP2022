@@ -100,16 +100,20 @@ public class Stats {
         }
     }
 
-    public double getSpeed(){
+    public double getSpeed(int condition){
         int buffFactor = statBuff.getBuffSpeed();
+        double currSpeed = speed;
         if(buffFactor < 0){
-            return speed*2/(2-buffFactor);
+            currSpeed *= 2/(2-buffFactor);
         }
-        else if(buffFactor == 0){
-            return speed;
+        else if(buffFactor > 0){
+            currSpeed *= (2+buffFactor)/2;
+        }
+        if(condition == 4){
+            return currSpeed*0.5;
         }
         else{
-            return speed*(2+buffFactor)/2;
+            return currSpeed;
         }
     }
 
@@ -137,19 +141,19 @@ public class Stats {
     }
 
     // Method
-    public void printStats(){
+    public void printStats(int condition){
         System.out.println("Stats :");
         System.out.print("Health Point      : ");
-        System.out.println(healthPoint);
+        System.out.println(getHP());
         System.out.print("Attack            : ");
-        System.out.println(attack);
+        System.out.println(getAttack());
         System.out.print("Defense           : ");
-        System.out.println(defense);
+        System.out.println(getDefense());
         System.out.print("Special Attack    : ");
-        System.out.println(specialAttack);
+        System.out.println(getSpecialAttack());
         System.out.print("Special Defense   : ");
-        System.out.println(specialDefense);
+        System.out.println(getSpecialDefense());
         System.out.print("Speed             : ");
-        System.out.println(speed);
+        System.out.println(getSpeed(condition));
     }
 }

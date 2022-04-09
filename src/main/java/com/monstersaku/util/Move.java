@@ -130,5 +130,5 @@ public abstract class Move{
         }
         return effectivityFinal;
     }
-    public abstract Monster useMove (Monster sourceMonster, Monster targetMonster);
+    public abstract Monster useMove (Monster sourceMonster, Monster targetMonster, int turn);
 }
