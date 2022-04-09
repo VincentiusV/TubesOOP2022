@@ -47,7 +47,7 @@ public class Main {
 
     private static Player addMonster(String name, List<Monster> listName, List<Monster> pool) {
         Random rand = new Random();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 6; i++) {
             listName.add(new Monster(pool.get(Math.abs(rand.nextInt() % 10))));
         }
         Player player = new Player(name, listName);
