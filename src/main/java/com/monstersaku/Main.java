@@ -9,19 +9,30 @@ public class Main {
         String command;
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println(" \u001B[30m\b __  __  ____  _   _  _____ _______ ______ _____     _____         _  ___    _ ");
-        System.out.println(" \b|  \\/  |/ __ \\| \\ | |/ ____|__   __|  ____|  __ \\   / ____|  /\\   | |/ / |  | |\u001B[30m");
-        System.out.println(" \u001B[30m\b| \\  / | |  | |  \\| | (___    | |  | |__  | |__) | | (___   /  \\  | ' /| |  | |\u001B[30m");
-        System.out.println(" \u001B[31m\b| |\\/| | |  | | . ` |\\___ \\   | |  |  __| |  _  /   \\___ \\ / /\\ \\ |  < | |  | |");
-        System.out.println(" \u001B[31m\b| |  | | |__| | |\\  |____) |  | |  | |____| | \\ \\   ____) / ____ \\| . \\| |__| |");
-        System.out.println(" \u001B[37m\b|_|  |_|\\____/|_| \\_|_____/   |_|  |______|_|  \\_\\ |_____/_/    \\_\\_|\\_\\\\____/ \u001B[37m");
-        
+        System.out.println(
+                " \u001B[30m\b __  __  ____  _   _  _____ _______ ______ _____     _____         _  ___    _ ");
+        System.out.println(
+                " \b|  \\/  |/ __ \\| \\ | |/ ____|__   __|  ____|  __ \\   / ____|  /\\   | |/ / |  | |\u001B[30m");
+        System.out.println(
+                " \u001B[30m\b| \\  / | |  | |  \\| | (___    | |  | |__  | |__) | | (___   /  \\  | ' /| |  | |\u001B[30m");
+        System.out.println(
+                " \u001B[31m\b| |\\/| | |  | | . ` |\\___ \\   | |  |  __| |  _  /   \\___ \\ / /\\ \\ |  < | |  | |");
+        System.out.println(
+                " \u001B[31m\b| |  | | |__| | |\\  |____) |  | |  | |____| | \\ \\   ____) / ____ \\| . \\| |__| |");
+        System.out.println(
+                " \u001B[37m\b|_|  |_|\\____/|_| \\_|_____/   |_|  |______|_|  \\_\\ |_____/_/    \\_\\_|\\_\\\\____/ \u001B[37m");
+
         System.out.println(" \n\n\t\t    \033[0;103m                              \u001B[0m");
-        System.out.println(" \t\t    \033[0;103m  \u001B[0m\t                     \t\t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
-        System.out.println(" \t\t    \033[0;103m  \u001B[0m\t\t \b\b\b\b\033[1;96mStart Game\033[0m         \t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
-        System.out.println(" \t\t    \033[0;103m  \u001B[0m\t\t\t \b\b\b\b\b\b\b\b\b\033[1;97mHelp\033[0m               \b\b\b\033[0;103m  \u001B[0m");
-        System.out.println(" \t\t    \033[0;103m  \u001B[0m\t\t\t \b\b\b\b\b\b\b\b\b\033[1;97mExit\033[0m                  \b\b\b\b\b\b\033[0;103m  \u001B[0m");
-        System.out.println(" \t\t    \033[0;103m  \u001B[0m\t                     \t\t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
+        System.out.println(
+                " \t\t    \033[0;103m  \u001B[0m\t                     \t\t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
+        System.out.println(
+                " \t\t    \033[0;103m  \u001B[0m\t\t \b\b\b\b\033[1;96mStart Game\033[0m         \t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
+        System.out.println(
+                " \t\t    \033[0;103m  \u001B[0m\t\t\t \b\b\b\b\b\b\b\b\b\033[1;97mHelp\033[0m               \b\b\b\033[0;103m  \u001B[0m");
+        System.out.println(
+                " \t\t    \033[0;103m  \u001B[0m\t\t\t \b\b\b\b\b\b\b\b\b\033[1;97mExit\033[0m                  \b\b\b\b\b\b\033[0;103m  \u001B[0m");
+        System.out.println(
+                " \t\t    \033[0;103m  \u001B[0m\t                     \t\t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
         System.out.println(" \t\t    \033[0;103m                              \u001B[0m\n");
 
         // inisialisasi
@@ -45,6 +56,14 @@ public class Main {
         scanner.close();
     }
 
+    /**
+     * Randomize monster for player
+     * 
+     * @param name
+     * @param listName
+     * @param pool
+     * @return
+     */
     private static Player addMonster(String name, List<Monster> listName, List<Monster> pool) {
         Random rand = new Random();
         for (int i = 0; i < 6; i++) {
@@ -56,26 +75,32 @@ public class Main {
         return player;
     }
 
-
     // method game
     /**
      * Memasukkan move kembali kedalam list
+     * 
      * @param move,movelist
      * @return movelist
      */
-    public static List<Move> giveRenewedMove(Move move, List<Move> movelist){
+    public static List<Move> giveRenewedMove(Move move, List<Move> movelist) {
 
-        if(move.getAmmunition() > 0){
+        if (move.getAmmunition() > 0) {
             int index = movelist.indexOf(move);
             movelist.set(index, move);
-        }
-        else if(move instanceof DefaultMove){}
-        else{
+        } else if (move instanceof DefaultMove) {
+        } else {
             movelist.remove(move);
         }
         return movelist;
     }
 
+    /**
+     * Choosing move for this turn
+     * 
+     * @param monster1
+     * @param scanner
+     * @return
+     */
     public static Move chooseMove(Monster monster1, Scanner scanner) {
         monster1.printMonsterMoves();
         System.out.printf("Pilih move apa yang akan dilakukan oleh %s: ", monster1.getName());
@@ -94,9 +119,12 @@ public class Main {
     /**
      * Mengembalikan input yang diberikan oleh yaitu index yang
      * dimaksudkan untuk melihat monster yang dimiliki player
+     * 
+     * @param player
+     * @param scanner
+     * @return (int) index
      */
     public static int selectMonster(Player player, Scanner scanner) {
-        System.out.printf("Pilihan Monster %s: %n", player.getPlayerName());
         player.printMonsterList();
         System.out.printf("Id monster yang akan digunakan %s: ", player.getPlayerName());
         int index = scanner.nextInt();
@@ -117,23 +145,21 @@ public class Main {
         System.out.println();
         return index;
     }
-    private static void printBattleMenu(Monster monster, Player player, int skipmove){
-        System.out.printf("%s HP: %.2f%n",monster.getName(), monster.getBaseStats().getHP());
+
+    private static void printBattleMenu(Monster monster, Player player, int skipmove) {
+        System.out.printf("%s HP: %.2f%n", monster.getName(), monster.getBaseStats().getHP());
         System.out.printf("Apa yang akan %s lakukan?%n", monster.getName());
         System.out.println("==== SELECTION MENU ====");
-        if(skipmove == 1 && player.getMonsterList().size() == 1){
+        if (skipmove == 1 && player.getMonsterList().size() == 1) {
             System.out.println("--  Move tidak tersedia  --");
-            System.out.println("-- Switch tidak tersedia --");     
-        }
-        else if(skipmove == 1 && player.getMonsterList().size() > 1){
+            System.out.println("-- Switch tidak tersedia --");
+        } else if (skipmove == 1 && player.getMonsterList().size() > 1) {
             System.out.println("--  Move tidak tersedia  --");
-            System.out.println("2. Switch Monster"); 
-        }
-        else if(skipmove == 0 && player.getMonsterList().size() == 1){
+            System.out.println("2. Switch Monster");
+        } else if (skipmove == 0 && player.getMonsterList().size() == 1) {
             System.out.println("1. Move");
-            System.out.println("-- Switch tidak tersedia --"); 
-        }
-        else{
+            System.out.println("-- Switch tidak tersedia --");
+        } else {
             System.out.println("1. Move");
             System.out.println("2. Switch Monster");
         }
@@ -143,25 +169,34 @@ public class Main {
         System.out.println();
         System.out.printf("Pilihan Anda: ");
     }
+
+    /**
+     * Choosing choice for action this turn
+     * 
+     * @param monsterPool
+     * @param turn
+     * @param player
+     * @param monster
+     * @param scanner
+     * @return choice (int)
+     */
     public static int battleMenu(MonsterPool monsterPool, int turn, Player player, Monster monster,
             Scanner scanner) {
         int skipmove = 0;
-        if(monster.getCondition().get(0) == 3){
+        if (monster.getCondition().get(0) == 3) {
             skipmove = 1;
-        }
-        else if(monster.getCondition().get(0) == 4){
+        } else if (monster.getCondition().get(0) == 4) {
             Double randomizer = Math.random();
-            if(randomizer >= 0.75){
+            if (randomizer >= 0.75) {
                 skipmove = 1;
-            }
-            else{
+            } else {
                 skipmove = 0;
             }
         }
         printBattleMenu(monster, player, skipmove);
         Integer choice = scanner.nextInt();
-        
-        if(skipmove == 1 && player.getMonsterList().size() == 1){
+
+        if (skipmove == 1 && player.getMonsterList().size() == 1) {
             while (!choice.equals(5)) {
                 if (choice.equals(3)) {
                     viewMonsterInfo(monsterPool);
@@ -178,10 +213,8 @@ public class Main {
                     choice = scanner.nextInt();
                 }
             }
-        } 
-        else if(skipmove == 1 && player.getMonsterList().size() > 1){
+        } else if (skipmove == 1 && player.getMonsterList().size() > 1) {
             while (!choice.equals(2) && !choice.equals(5)) {
-                System.out.println("wryyyyy");
                 if (choice.equals(3)) {
                     viewMonsterInfo(monsterPool);
                     printBattleMenu(monster, player, skipmove);
@@ -197,8 +230,7 @@ public class Main {
                     choice = scanner.nextInt();
                 }
             }
-        }
-        else if(skipmove == 0 && player.getMonsterList().size() == 1){
+        } else if (skipmove == 0 && player.getMonsterList().size() == 1) {
             while (!choice.equals(1) && !choice.equals(5)) {
                 if (choice.equals(3)) {
                     viewMonsterInfo(monsterPool);
@@ -215,8 +247,7 @@ public class Main {
                     choice = scanner.nextInt();
                 }
             }
-        }
-        else {
+        } else {
             while (!choice.equals(1) && !choice.equals(2) && !choice.equals(5)) {
                 if (choice.equals(3)) {
                     viewMonsterInfo(monsterPool);
@@ -227,7 +258,7 @@ public class Main {
                     printBattleMenu(monster, player, skipmove);
                     choice = scanner.nextInt();
                     System.out.println();
-                }  else {
+                } else {
                     System.out.println("Masukan anda salah atau tidak tersedia.");
                     System.out.print("Pilihan Anda: ");
                     choice = scanner.nextInt();
@@ -237,57 +268,66 @@ public class Main {
         return choice;
     }
 
-    public static Monster dOTeffect(Monster monster, int turn) {
+    /**
+     * Calculate DOT effect and check sleep
+     * 
+     * @param monster
+     * @param turn
+     * @return
+     */
+    public static void dOTeffect(Monster monster, int turn) {
         ArrayList<Integer> condition = monster.getCondition();
         Stats bStats = monster.getBaseStats();
         double hp = bStats.getHP();
         double maxHP = bStats.getMaxHP();
-        switch (condition.get(0)) {
-            case 1:
-                bStats.setHP(hp - maxHP/8);
-                System.out.printf("%s mendapatkan damage sebesar %.2f akibat BURN!!!%n", monster.getName(), maxHP/8);
-                break;
-            case 2:
-                bStats.setHP(hp - maxHP/16);
-                System.out.printf("%s mendapatkan damage sebesar %.2f akibat POISON!!!%n", monster.getName(), maxHP/16);
-                break;
-            case 3:
-                if(condition.get(1) <= turn){
-                    condition.set(0, 0);
-                    System.out.printf("%s akhirnya terbangun!!!%n", monster.getName());
-                }
-                else {
-                    System.out.printf("%s masih tertidur dengan lelap...%n", monster.getName());
-                }
-            default:
-                break;
+        if (!monster.isDead()) {
+            switch (condition.get(0)) {
+                case 1:
+                    bStats.setHP(hp - maxHP / 8);
+                    System.out.printf("%s mendapatkan damage sebesar %.2f akibat BURN!!!%n", monster.getName(),
+                            maxHP / 8);
+                    break;
+                case 2:
+                    bStats.setHP(hp - maxHP / 16);
+                    System.out.printf("%s mendapatkan damage sebesar %.2f akibat POISON!!!%n", monster.getName(),
+                            maxHP / 16);
+                    break;
+                case 3:
+                    if (condition.get(1) <= turn) {
+                        condition.set(0, 0);
+                        System.out.printf("%s akhirnya terbangun!!!%n", monster.getName());
+                    } else {
+                        System.out.printf("%s masih tertidur dengan lelap...%n", monster.getName());
+                    }
+                default:
+                    break;
+            }
         }
         monster.setBaseStats(bStats);
-        return monster;
     }
 
+    /**
+     * Main Gameplay
+     * 
+     * @param scanner
+     * @return
+     */
     public static boolean gameplay(Scanner scanner) {
         // attribute
         int turn = 0;
         Integer choice;
-        System.out.printf("Loading.");
         try {
+            System.out.print("Loading.");
             Thread.sleep(1000);
+            System.out.print(".");
+            Thread.sleep(1000);
+            System.out.print(".");
+            Thread.sleep(1000);
+            System.out.println(".");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.printf(".");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(".");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         MonsterPool monsterPool = new MonsterPool();
         List<Monster> pool = monsterPool.getPool();
         List<Monster> playerPool1 = new LinkedList<Monster>();
@@ -300,6 +340,28 @@ public class Main {
         String name2 = scanner.next();
         Player player1 = addMonster(name1, playerPool1, pool);
         Player player2 = addMonster(name2, playerPool2, pool);
+
+        try {
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!");
+            Thread.sleep(500);
+            System.out.printf("%s menyerang %s!!!!", player1.getPlayerName(), player2.getPlayerName());
+            System.out.println("uhh... DIMANA POLISI!!!");
+            System.out.print("dan.. sekarang mereka mengeluarkan monster aneh dari kantung");
+            for (int i = 0; i < 3; i++) {
+                Thread.sleep(500);
+                System.out.print(".");
+            }
+            System.out.printf("%n%n");
+            for (int i = 0; i < 100; i++) {
+                System.out.print("Z");
+                Thread.sleep(10);
+            }
+            System.out.printf("%n%n");
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         try {
             // inisiasi monster
             player1.setCurrentMonsterIndex(selectMonster(player1, scanner));
@@ -315,141 +377,158 @@ public class Main {
                 System.out.printf("%nTURN %d.%n", turn);
                 // Player 1 Choosing Action
 
-                if (monster1.isDead()) {
-                    player1.monsterDead(monster1);
-                    if(!player1.isHaveMonster()){break;}
-                    System.out.printf("%s pingsan!!! Pilih monster lainnya!%n", monster1.getName());
+                System.out.printf("%s turn.%n", player1.getPlayerName());
+                choice = battleMenu(monsterPool, turn, player1, monster1, scanner);
+                if (choice.equals(1)) {
+                    monsterMove1 = chooseMove(monster1, scanner);
+
+                } else if (choice.equals(2)) { // select monster
                     // set new monster for player 1
                     player1.setCurrentMonsterIndex(selectMonster(player1, scanner));
+                    monster1.getBaseStats().getStatBuff().resetBuff();
                     monster1 = player1.getMonsterList().get(player1.getCurrentMonsterIndex());
-                } else {
-                    System.out.printf("%s turn.%n", player1.getPlayerName());
-                    choice = battleMenu(monsterPool, turn, player1, monster1, scanner);
-                    if (choice.equals(1)) {
-                        monsterMove1 = chooseMove(monster1, scanner);
-
-                    } else if (choice.equals(2)) { // select monster
-                        // set new monster for player 1
-                        monster1.getBaseStats().getStatBuff().resetBuff();
-                        player1.setCurrentMonsterIndex(selectMonster(player1, scanner));
-                        monster1 = player1.getMonsterList().get(player1.getCurrentMonsterIndex());
-                    }
-                    System.out.println();
                 }
+                System.out.println();
 
                 // Player 2 Choosing Action
-                if (monster2.isDead()) {
-                    player2.monsterDead(monster2);
-                    if(!player2.isHaveMonster()){break;}
-                    System.out.printf("%s pingsan!!! Pilih monster lainnya!%n", monster2.getName());
-                    // set new monster for player 2
-                    player2.setCurrentMonsterIndex(selectMonster(player2, scanner));
-                    monster2 = player2.getMonsterList().get(player2.getCurrentMonsterIndex());
 
-                } else {
-                    System.out.printf("%s turn.%n", player2.getPlayerName());
-                    choice = battleMenu(monsterPool, turn, player2, monster2, scanner);
-                    if (choice.equals(1)) {
-                        monsterMove2 = chooseMove(monster2, scanner);
-                    } else if (choice.equals(2)) { // select monster
-                        player2.setCurrentMonsterIndex(selectMonster(player2, scanner));
-                        monster2 = player2.getMonsterList().get(player2.getCurrentMonsterIndex());
-                    }
+                System.out.printf("%s turn.%n", player2.getPlayerName());
+                choice = battleMenu(monsterPool, turn, player2, monster2, scanner);
+                if (choice.equals(1)) {
+                    monsterMove2 = chooseMove(monster2, scanner);
+                } else if (choice.equals(2)) { // select monster
+                    player2.setCurrentMonsterIndex(selectMonster(player2, scanner));
+                    monster1.getBaseStats().getStatBuff().resetBuff();
+                    monster2 = player2.getMonsterList().get(player2.getCurrentMonsterIndex());
                 }
+
                 // Action in progress {disini DOT, nerima damage, heal disini}
                 // check siapa duluan
                 int urutanType = 0;
-                if(monsterMove1 != null && monsterMove2 != null){
-                    if(monsterMove1.getPriority() == monsterMove2.getPriority()){
-                        if(monster1.getBaseStats().getSpeed(monster1.getCondition().get(0)) > monster2.getBaseStats().getSpeed(monster2.getCondition().get(0))){
+                if (monsterMove1 != null && monsterMove2 != null) {
+                    if (monsterMove1.getPriority() == monsterMove2.getPriority()) {
+                        if (monster1.getBaseStats().getSpeed(monster1.getCondition().get(0)) > monster2.getBaseStats()
+                                .getSpeed(monster2.getCondition().get(0))) {
                             urutanType = 1;
-                        }
-                        else if(monster1.getBaseStats().getSpeed(monster1.getCondition().get(0)) < monster2.getBaseStats().getSpeed(monster2.getCondition().get(0))){
+                        } else if (monster1.getBaseStats().getSpeed(monster1.getCondition().get(0)) < monster2
+                                .getBaseStats().getSpeed(monster2.getCondition().get(0))) {
                             urutanType = 2;
+                        } else {
+                            urutanType = 1 + (int) (Math.random() + 1);
                         }
-                        else{
-                            urutanType = 1 + (int)(Math.random() + 1);
-                        }
-                    }
-                    else if(monsterMove1.getPriority() < monsterMove2.getPriority()){
+                    } else if (monsterMove1.getPriority() < monsterMove2.getPriority()) {
                         urutanType = 2;
-                    }
-                    else{
+                    } else {
                         urutanType = 1;
                     }
-                    switch(urutanType){
+                    switch (urutanType) {
                         case 1:
-                        // player 1 do the thing
-                        if(monsterMove1.getTarget() == "OWN"){
-                            monsterMove1.useMove(monster1, monster1, turn);
-                        } else{
+                            // player 1 do the thing
                             monsterMove1.useMove(monster1, monster2, turn);
-                        }
-                        monster1.setMoveList(giveRenewedMove(monsterMove1, monster1.getMoveList()));
-                        monsterMove1 = null;
+                            Thread.sleep(500);
+                            monster1.setMoveList(giveRenewedMove(monsterMove1, monster1.getMoveList()));
+                            monsterMove1 = null;
 
-                        // player 2 do the thing
-                        if(monsterMove2.getTarget() == "OWN"){
-                            monsterMove2.useMove(monster2, monster2, turn);
-                        } else{
-                            monsterMove2.useMove(monster2, monster1, turn);
-                        }
-                        monster2.setMoveList(giveRenewedMove(monsterMove2, monster2.getMoveList()));
-                        monsterMove2 = null;
-                        break;
+                            // player 2 do the thing
+                            if (!monster2.isDead()) { // still alive, able to do action
+                                monsterMove2.useMove(monster2, monster1, turn);
+                                Thread.sleep(500);
+                                monster2.setMoveList(giveRenewedMove(monsterMove2, monster2.getMoveList()));
+                            }
+                            monsterMove2 = null;
+                            break;
 
                         case 2:
-                        // player 2 do the thing
-                        if(monsterMove2.getTarget() == "OWN"){
-                            monsterMove2.useMove(monster2, monster2, turn);
-                        } else{
+                            // player 2 do the thing
                             monsterMove2.useMove(monster2, monster1, turn);
-                        }
-                        monster2.setMoveList(giveRenewedMove(monsterMove2, monster2.getMoveList()));
-                        monsterMove2 = null;
+                            Thread.sleep(500);
+                            monster2.setMoveList(giveRenewedMove(monsterMove2, monster2.getMoveList()));
+                            monsterMove2 = null;
 
-                        // player 1 do the thing
-                        if(monsterMove1.getTarget() == "OWN"){
-                            monsterMove1.useMove(monster1, monster1, turn);
-                        } else{
-                            monsterMove1.useMove(monster1, monster2, turn);
-                        }
-                        monster1.setMoveList(giveRenewedMove(monsterMove1, monster1.getMoveList()));
-                        monsterMove1 = null;
-                        break;
+                            // player 1 do the thing
+                            if (!monster1.isDead()) { // still alive, able to do action
+                                monsterMove1.useMove(monster1, monster2, turn);
+                                Thread.sleep(500);
+                                monster1.setMoveList(giveRenewedMove(monsterMove1, monster1.getMoveList()));
+                            }
+                            monsterMove1 = null;
+                            break;
                     }
-                }
-                else if(monsterMove1 == null && monsterMove2 == null){
-                    // nothing happen
-                }
-                else if(monsterMove2 == null){
-                    if(monsterMove1.getTarget() == "OWN"){
-                        monsterMove1.useMove(monster1, monster1, turn);
-                    } else{
-                        monsterMove1.useMove(monster1, monster2, turn);
-                    }
+                } else if (monsterMove1 == null && monsterMove2 == null) {
+                    System.out.printf("%s dan %s saling menatap...%n", monster1.getName(), monster2.getName());
+                } else if (monsterMove2 == null) {
+                    monsterMove1.useMove(monster1, monster2, turn);
+                    Thread.sleep(500);
                     monster1.setMoveList(giveRenewedMove(monsterMove1, monster1.getMoveList()));
                     monsterMove1 = null;
-                }
-                else if(monsterMove1 == null){
-                    if(monsterMove2.getTarget() == "OWN"){
-                        monsterMove2.useMove(monster2, monster2, turn);
-                    } else{
-                        monsterMove2.useMove(monster2, monster1, turn);
-                    }
+                } else if (monsterMove1 == null) {
+                    monsterMove2.useMove(monster2, monster1, turn);
+                    Thread.sleep(500);
                     monster2.setMoveList(giveRenewedMove(monsterMove2, monster2.getMoveList()));
                     monsterMove2 = null;
                 }
+                // death check
+                if (monster1.isDead()) {
+                    player1.monsterDead(monster1);
+                    if (!player1.isHaveMonster()) {
+                        break;
+                    }
+                    System.out.printf("%s MENJADI NON-BREATHER!!! Pilih monster lainnya!%n", monster1.getName());
+                    Thread.sleep(500);
+                    // set new monster for player 1
+                    player1.setCurrentMonsterIndex(selectMonster(player1, scanner));
+                    monster1.getBaseStats().getStatBuff().resetBuff();
+                    monster1 = player1.getMonsterList().get(player1.getCurrentMonsterIndex());
+                }
+                if (monster2.isDead()) {
+                    player2.monsterDead(monster1);
+                    if (!player2.isHaveMonster()) {
+                        break;
+                    }
+                    System.out.printf("%s  MENJADI NON-BREATHER!!! Pilih monster lainnya!%n", monster2.getName());
+                    Thread.sleep(500);
+                    // set new monster for player 2
+                    player2.setCurrentMonsterIndex(selectMonster(player2, scanner));
+                    monster2.getBaseStats().getStatBuff().resetBuff();
+                    monster2 = player2.getMonsterList().get(player2.getCurrentMonsterIndex());
+                }
                 // DOT in effect
-                monster1 = dOTeffect(monster1, turn);
-                monster2 = dOTeffect(monster2, turn);
+                dOTeffect(monster1, turn);
+                Thread.sleep(500);
+                dOTeffect(monster2, turn);
+                Thread.sleep(500);
+
+                // another death check
+                if (monster1.isDead()) {
+                    player1.monsterDead(monster1);
+                    if (!player1.isHaveMonster()) {
+                        break;
+                    }
+                    System.out.printf("%s MENJADI NON-BREATHER!!! Pilih monster lainnya!%n", monster1.getName());
+                    Thread.sleep(500);
+                    // set new monster for player 1
+                    player1.setCurrentMonsterIndex(selectMonster(player1, scanner));
+                    monster1.getBaseStats().getStatBuff().resetBuff();
+                    monster1 = player1.getMonsterList().get(player1.getCurrentMonsterIndex());
+                }
+                if (monster2.isDead()) {
+                    player2.monsterDead(monster1);
+                    if (!player2.isHaveMonster()) {
+                        break;
+                    }
+                    System.out.printf("%s MENJADI NON-BREATHER!!! Pilih monster lainnya!%n", monster2.getName());
+                    Thread.sleep(500);
+                    // set new monster for player 2
+                    player2.setCurrentMonsterIndex(selectMonster(player2, scanner));
+                    monster2.getBaseStats().getStatBuff().resetBuff();
+                    monster2 = player2.getMonsterList().get(player2.getCurrentMonsterIndex());
+                }
             }
-            if(!player1.isHaveMonster() && !player2.isHaveMonster()){
+            if (!player1.isHaveMonster() && !player2.isHaveMonster()) {
                 System.out.println("Permainan telah berakhir! PERMAINAN BERAKHIR SERI!!!");
-            }
-            else if(player1.isHaveMonster()){
+            } else if (player1.isHaveMonster()) {
                 System.out.printf("Permainan telah berakhir! Pemenangnya adalah... %s!!!%n", player1.getPlayerName());
-            } else if(player2.isHaveMonster()){
+            } else if (player2.isHaveMonster()) {
                 System.out.printf("Permainan telah berakhir! Pemenangnya adalah... %s!!!%n", player2.getPlayerName());
             }
 
@@ -460,6 +539,9 @@ public class Main {
         return true;
     }
 
+    /**
+     * Printing HELP
+     */
     public static void help() {
         System.out.println(" \t\t\t \u001B[30m       __  __     __    ");
         System.out.println(" \t\t\t       / / / /__  / /___ \u001B[0m");
@@ -490,12 +572,12 @@ public class Main {
 
     public static void viewGameInfo(Monster monster, Player player, int turn) {
         System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
-        System.out.printf("Sekarang turn %d%n%n%n", turn);
-        System.out.printf("Monster yang digunakan saat ini:%n%n%n");
-        System.out.println("Stats: ");
+        System.out.printf("Sekarang turn %d%n%n", turn);
+        System.out.printf("Monster yang digunakan saat ini:%n%n");
         monster.getBaseStats().printStats(monster.getCondition().get(0));
-        System.out.println("Move: ");
+        monster.getBaseStats().getStatBuff().printBuff();
         monster.printMonsterMoves();
+        System.out.println();
         player.printMonsterList();
         System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
     }

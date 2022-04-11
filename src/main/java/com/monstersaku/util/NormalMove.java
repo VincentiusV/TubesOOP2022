@@ -12,8 +12,18 @@ public class NormalMove extends Move {
         super(move.name, move.elementType, move.accuracy, move.priority, move.ammunition, move.target);
     }
 
-    public Monster useMove(Monster sourceMonster, Monster targetMonster, int turn) {
+    public void useMove(Monster monster1, Monster monster2, int turn) {
+        Monster sourceMonster;
+        Monster targetMonster;
         float finaldamage;
+        if(super.getTarget().equals("OWN")){
+            targetMonster = monster1;
+            sourceMonster = monster1;
+        }
+        else{
+            targetMonster = monster2;
+            sourceMonster = monster1;
+        }
         if(sourceMonster.getCondition().get(0) == 1){ // monster kondisi BURN
             finaldamage = (float) Math
                 .floor((((sourceMonster.getBaseStats().getAttack()) / (targetMonster.getBaseStats().getDefense())) + 2)
@@ -31,6 +41,5 @@ public class NormalMove extends Move {
         String targetName = targetMonster.getName();
         System.out.printf("%s menggunakan move %s kepada %s! %s mendapatkan damage sebesar %.2f.%n",
                 sourceMonster.getName(), super.name, targetName, targetName, finaldamage);
-        return targetMonster;
     }
 }

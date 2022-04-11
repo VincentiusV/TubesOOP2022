@@ -16,6 +16,7 @@ public abstract class Move{
         this.accuracy = accuracy;
         this.priority = priority;
         this.ammunition = ammunition;
+        this.target = target;
     }
     
     //getter & setter
@@ -130,5 +131,5 @@ public abstract class Move{
         }
         return effectivityFinal;
     }
-    public abstract Monster useMove (Monster sourceMonster, Monster targetMonster, int turn);
+    public abstract void useMove (Monster monster1, Monster monster2, int turn);
 }

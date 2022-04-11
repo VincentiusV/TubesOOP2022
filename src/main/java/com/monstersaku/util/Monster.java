@@ -166,4 +166,27 @@ public class Monster {
     public boolean isDead() {
         return (getBaseStats().getHP() <= 0);
     }
+
+    /**
+     * Print monster current condition
+     */
+    public void printCondition() {
+        switch (condition.get(0)) {
+            case 1:
+                System.out.println("Condition: BURN");
+                break;
+            case 2:
+                System.out.println("Condition: POISON");
+                break;
+            case 3:
+                System.out.println("Condition: SLEEP");
+                break;
+            case 4:
+                System.out.println("Condition: PARALYZE");
+                break;
+        
+            default:
+                break;
+        }
+    }
 }

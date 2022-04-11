@@ -23,7 +23,17 @@ public class StatusMove extends Move{
     public Stats getChangedStats(){
         return changedStats;
     }
-    public Monster useMove(Monster sourceMonster, Monster targetMonster, int turn) {
+    public void useMove(Monster monster1, Monster monster2, int turn) {
+        Monster sourceMonster;
+        Monster targetMonster;
+        if(super.getTarget().equals("OWN")){
+            targetMonster = monster1;
+            sourceMonster = monster1;
+        }
+        else{
+            targetMonster = monster2;
+            sourceMonster = monster1;
+        }
         System.out.printf("%s menggunakan move %s kepada %s! ", sourceMonster.getName(), name, targetMonster.getName());
         switch (statusCondition) {
             case "BURN": // BURN
@@ -46,10 +56,10 @@ public class StatusMove extends Move{
                 break;
             default:
             targetMonster.setBaseStats(buffDebuff(targetMonster.getBaseStats(), changedStats));
+            System.out.println();
             break;
         }
         super.ammunition -= 1;
-        return targetMonster;
     }
     public Stats buffDebuff(Stats currStats, Stats affectingStats){
         double hp = currStats.getHP() + affectingStats.getHP();
