@@ -37,14 +37,14 @@ public class Main {
 
         // inisialisasi
         while (!end) {
-            System.out.printf("Masukkan pilihan Anda: ");
+            System.out.print("Masukkan pilihan Anda: ");
             command = scanner.nextLine();
-            if (command.equals("Help")) {
+            if (command.equals("Help") || command.equals("help")) {
                 help();
-            } else if (command.equals("Exit")) {
+            } else if (command.equals("Exit") || command.equals("exit")) {
                 System.out.println("Sampai jumpa!! Semoga Sugar memberkati anda!!");
                 end = true;
-            } else if (command.equals("Start Game")) {
+            } else if (command.equals("Start Game") || command.equals("start game")) {
                 end = gameplay(scanner);
             } else {
                 System.out.println("Masukan anda salah atuhhh, cuma ada 3 pilihannya!");
@@ -531,7 +531,48 @@ public class Main {
             } else if (player2.isHaveMonster()) {
                 System.out.printf("Permainan telah berakhir! Pemenangnya adalah... %s!!!%n", player2.getPlayerName());
             }
+            String[] sugarNyaa = {
+                "@@@@@@@@@@@@@@     %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&  ,,, &@@@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@  ,,,   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ,,,,,  @@@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@& ,,,,,   ,@@@@@@@@@@@@@@@@@@@@@@@@@@@      ,,,,  @@@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@& ,,,,       @@@@@@@#           #@@@.       , ,,  @@@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@@ (,,                                   ,    ,,,  @@@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@@  ,,,                                            @@@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@@  ,,        *                               * * @@@@@       @@@@@",
+                "@@@@@@@@@@@@@@@( ,,                                            @@@@         @@@@",
+                "@@@@@@@@@@@@@@@@        . ,      ,     ,                   .  @@@@           @@@",
+                "@@@@@@@@@@@@@@@@         ,      ,,     ,       ,       ,       @@@           @@@",
+                "@@@@@@@@@@@@@@@@&       ,      , ,     ,        .     ,        @@@   NYAA~   @@@",
+                "@@@@@@@@@@@@@@@@.       ,,,,,,   ,,,,,/ ,,,,,,( , ,,,,         /@@           @@@",
+                "@@@@@@@@@@@@@@@@                                         ,   .  @@,         ,@@@",
+                "@@@@@@@@@@@@@@@@                                                @@@,       ,@@@@",
+                "@@@@@@@@@@@@@@@@                                                &@@@,,,,,,,@@@@@",
+                "@@@@@@@@@@@@@@@&                                          .      (@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@                                                      @@@@@@@@@@@@",
+                "@@@@@@@@@@@@                                                          @@@@@@@@@@",
+                "@@@@@@@@@@&    ,       /                                               @@@@@@@@@",
+                "@@@@@@@@@#   , , ,                                              ,      (@@@@@@@@",
+                "@@@@@@@@&    ,,, ,,     .                                               @@@@@@@@",
+                "@@@@@@@@     ,,,,,,,     ,                             *    ,, *        @@@@@@@@",
+                "@@@@@@@%      ,,,,,,      ,,                         ,,   ,,, ,        .@@@@@@@@",
+                "@@@@@@@%       ,,,,,,,     ,,,,                   ,,,,  ,,,,,,         @@@@@@@@@",
+                "@@@@@@@@        ,,,,,,,,(   ,,,,,,,,,,,..,,,,,,,,,,,,,,,,,,,,   *     #@@@@@@@@@",
+                "@@@@@@@@@  @      ,,,,,,,,,   ,,,,,,,,,,,,,,,,,,(,,,,,,, (,,  ,,   @@*@@@@@@@@@@",
+                "@@@@@@@@@@@@&@@@    &,@@,,@@@&,@&,,,,,,,,,,,,,,,,,,&@@@@ @@,@@@ @@@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  (,,,,,,,,,,,,,,,,,, @@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  ,,,,,,,,,,,,,,,,,,  @@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@(  ,,,,,,,,,,,,,,,,,,  (@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@@@@@@@@@&((((((((   ****************   ((((((((((((((&@@@@@@@@@@@@@",
+                "@@@@@@@@@@@@@(((((((((((((((((....**************....(((((((((((((((((((((@@@@@@@"
+            };
+            System.out.println("Pertandingan ini diberkahi oleh Sugar-Sama");
+            System.out.println();
+            for(int i = 0; i<32; i++){
+                System.out.println(sugarNyaa[i]);
+            }
 
+        } catch (InputMismatchException e){
+            System.out.println("Input anda salah, Memberhentikan permainan");
         } catch (Exception e) {
             System.out.println(e);
         }
