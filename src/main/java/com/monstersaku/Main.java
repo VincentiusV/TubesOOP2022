@@ -8,49 +8,47 @@ public class Main {
         boolean end = false;
         String command;
         Scanner scanner = new Scanner(System.in);
+        String[] monsterSakuSymbol = 
+        {
+            " \u001B[30m\b __  __  ____  _   _  _____ _______ ______ _____     _____         _  ___    _ ",
+            " \b|  \\/  |/ __ \\| \\ | |/ ____|__   __|  ____|  __ \\   / ____|  /\\   | |/ / |  | |\u001B[30m",
+            " \u001B[30m\b| \\  / | |  | |  \\| | (___    | |  | |__  | |__) | | (___   /  \\  | ' /| |  | |\u001B[30m",
+            " \u001B[31m\b| |\\/| | |  | | . ` |\\___ \\   | |  |  __| |  _  /   \\___ \\ / /\\ \\ |  < | |  | |",
+            " \u001B[31m\b| |  | | |__| | |\\  |____) |  | |  | |____| | \\ \\   ____) / ____ \\| . \\| |__| |",
+            " \u001B[37m\b|_|  |_|\\____/|_| \\_|_____/   |_|  |______|_|  \\_\\ |_____/_/    \\_\\_|\\_\\\\____/ \u001B[37m"
+        };
 
-        System.out.println(
-                " \u001B[30m\b __  __  ____  _   _  _____ _______ ______ _____     _____         _  ___    _ ");
-        System.out.println(
-                " \b|  \\/  |/ __ \\| \\ | |/ ____|__   __|  ____|  __ \\   / ____|  /\\   | |/ / |  | |\u001B[30m");
-        System.out.println(
-                " \u001B[30m\b| \\  / | |  | |  \\| | (___    | |  | |__  | |__) | | (___   /  \\  | ' /| |  | |\u001B[30m");
-        System.out.println(
-                " \u001B[31m\b| |\\/| | |  | | . ` |\\___ \\   | |  |  __| |  _  /   \\___ \\ / /\\ \\ |  < | |  | |");
-        System.out.println(
-                " \u001B[31m\b| |  | | |__| | |\\  |____) |  | |  | |____| | \\ \\   ____) / ____ \\| . \\| |__| |");
-        System.out.println(
-                " \u001B[37m\b|_|  |_|\\____/|_| \\_|_____/   |_|  |______|_|  \\_\\ |_____/_/    \\_\\_|\\_\\\\____/ \u001B[37m");
+        String[] menu = 
+        {
+            " \n\n\t\t    \033[0;103m                              \u001B[0m",
+            " \t\t    \033[0;103m  \u001B[0m\t                     \t\t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m",
+            " \t\t    \033[0;103m  \u001B[0m\t\t \b\b\b\b\033[1;96mStart Game\033[0m         \t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m",
+            " \t\t    \033[0;103m  \u001B[0m\t\t\t \b\b\b\b\b\b\b\b\b\033[1;97mHelp\033[0m               \b\b\b\033[0;103m  \u001B[0m",
+            " \t\t    \033[0;103m  \u001B[0m\t\t\t \b\b\b\b\b\b\b\b\b\033[1;97mExit\033[0m                  \b\b\b\b\b\b\033[0;103m  \u001B[0m",
+            " \t\t    \033[0;103m  \u001B[0m\t                     \t\t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m",
+            " \t\t    \033[0;103m                              \u001B[0m\n"
+        };
 
-        System.out.println(" \n\n\t\t    \033[0;103m                              \u001B[0m");
-        System.out.println(
-                " \t\t    \033[0;103m  \u001B[0m\t                     \t\t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
-        System.out.println(
-                " \t\t    \033[0;103m  \u001B[0m\t\t \b\b\b\b\033[1;96mStart Game\033[0m         \t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
-        System.out.println(
-                " \t\t    \033[0;103m  \u001B[0m\t\t\t \b\b\b\b\b\b\b\b\b\033[1;97mHelp\033[0m               \b\b\b\033[0;103m  \u001B[0m");
-        System.out.println(
-                " \t\t    \033[0;103m  \u001B[0m\t\t\t \b\b\b\b\b\b\b\b\b\033[1;97mExit\033[0m                  \b\b\b\b\b\b\033[0;103m  \u001B[0m");
-        System.out.println(
-                " \t\t    \033[0;103m  \u001B[0m\t                     \t\t\b\b\b\b\b\b\b\b\033[0;103m  \u001B[0m");
-        System.out.println(" \t\t    \033[0;103m                              \u001B[0m\n");
+        for(String line : monsterSakuSymbol){
+            System.out.println(line);
+        }
+        for(String line : menu){
+            System.out.println(line);
+        }
 
         // inisialisasi
         while (!end) {
             System.out.print("Masukkan pilihan Anda: ");
-            command = scanner.nextLine();
-            if (command.equals("Help") || command.equals("help")) {
+            command = scanner.nextLine().toLowerCase();
+            if (command.equals("help")) {
                 help();
-            } else if (command.equals("Exit") || command.equals("exit")) {
+            } else if (command.equals("exit")) {
                 System.out.println("Sampai jumpa!! Semoga Sugar memberkati anda!!");
                 end = true;
-            } else if (command.equals("Start Game") || command.equals("start game")) {
+            } else if (command.equals("start game")) {
                 end = gameplay(scanner);
             } else {
                 System.out.println("Masukan anda salah atuhhh, cuma ada 3 pilihannya!");
-                System.out.println("1. Start Game");
-                System.out.println("2. Help");
-                System.out.println("3. Exit");
             }
         }
         scanner.close();
@@ -584,6 +582,7 @@ public class Main {
      * Printing HELP
      */
     public static void help() {
+        
         System.out.println(" \t\t\t \u001B[30m       __  __     __    ");
         System.out.println(" \t\t\t       / / / /__  / /___ \u001B[0m");
         System.out.println(" \t\t\t\u001B[30m      / /_/ / _ \\/ / __ \\\u001B[0m");
@@ -596,13 +595,20 @@ public class Main {
         System.out.println("Pada saat memulai pertandingan, anda dan musuh anda akan disuruh mengisi nama dan memilih");
         System.out
                 .println("monster yang ingin anda pakai untuk mengalahkan musuh anda. Setelah itu anda dapat memilih");
-        System.out.println("apa yang ingin anda lakukan. Terdapat 4 pilihan, yaitu Move dan Switch.");
+        System.out.println("apa yang ingin anda lakukan. Terdapat 5 pilihan, yaitu:");
+        System.out.println("1. Move");
+        System.out.println("2. Switch Monster");
+        System.out.println("3. View Monster Info");
+        System.out.println("4. View Game Info");
+        System.out.println("5. Skip");
         System.out.println(
                 "Pilihan Move digunakan jika anda ingin monster saku anda melakukan suatu aksi. Sementara Pilihan");
         System.out.println(
                 "Switch, digunakan untuk menukar monster saku sekarang. Jika monster saku anda pingsan, anda akan");
         System.out.println("dipaksa melakukan Switch!");
         System.out.println("Pilihan ketiga adalah pilihan melihat info monster yang ada saat permainan");
+        System.out.println("Pilihan keempat adalah pilihan melihat permainan");
+        System.out.println("dan gunakan pilihan kelima untuk melakukan SKIP TURN");
         System.out.println("Gunakan strategi anda sebaik mungkin dan kalahkan musuh anda!");
         System.out.println("Semoga berkah Sugar memberkati anda");
     }
